@@ -17,7 +17,7 @@
       - unzip
       - mlocate
       - p7zip
-      - p7zip-ful
+      - p7zip-full
       - unzip
       - zip
       - libapache2-mod-php7.2
