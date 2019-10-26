@@ -4,6 +4,7 @@ Make sure target(s) has the public SSH key of the controller (AWX) machine insta
 
 ```
 ssh root@target
-nano ~/.ssh/authorized_keys 
+nano ~/.ssh/authorized_keys
+#add awx pub key
 ```
-Add awx pub key
+
