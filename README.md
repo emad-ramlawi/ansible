@@ -8,3 +8,10 @@ nano ~/.ssh/authorized_keys
 #add awx pub key
 ```
 
+If you want to use hostnames and not IPs, be sure to add the the hostnames in AWS /etc/hosts
+
+
+```
+nano /etc/hosts
+
+```
