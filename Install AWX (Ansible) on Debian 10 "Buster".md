@@ -1,3 +1,4 @@
+```
 ## Install AWX (Ansible) on Debian 10 "Buster"
 ---
 
@@ -53,3 +54,4 @@ docker-compose pull && docker-compose up --force-recreate -d
 
 ### source:
 https://www.andrehotzler.de/en/blog/technology/81-install-awx-ansible-on-debian-10-buster.html
+```
