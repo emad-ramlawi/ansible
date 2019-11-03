@@ -35,11 +35,15 @@ ansible-playbook install.yml -i inventory
 ---
 
 ### launch awx on reboot
+crontab -e
 @reboot bash /root/start_awx.sh
+
+nano /root/start_awx.sh
 cd /var/lib/awx && docker-compose start
 chmod +x /root/start_awx.sh
 
 ### stop awx 
+nano /root/stop_awx.sh
 cd /var/lib/awx && docker-compose stop
 
 ### update awx
