@@ -27,14 +27,14 @@ project_data_dir=/var/awx_projects
 
 ### install awx
 ansible-playbook install.yml -i inventory
-
+```
 ---
 
 *If no errors occurred here, you can enter the host name of the machine in the browser, log in with the user 
 "admin" and the password "password" and get started.*
 
 ---
-
+```
 ### launch awx on reboot
 crontab -e
 @reboot bash /root/start_awx.sh
