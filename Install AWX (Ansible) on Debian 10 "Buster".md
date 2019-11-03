@@ -48,9 +48,13 @@ nano /root/stop_awx.sh
 cd /var/lib/awx && docker-compose stop
 
 ### update awx
-cd /var/lib/awx
-docker-compose stop
+cd /var/lib/awx && docker-compose stop
 docker-compose pull && docker-compose up --force-recreate -d
+
+### change image port settings
+cd /var/lib/awx && docker-compose stop
+nano /var/lib/awx/docker-compose.yml
+cd /var/lib/awx && docker-compose start
 
 ### source:
 https://www.andrehotzler.de/en/blog/technology/81-install-awx-ansible-on-debian-10-buster.html
