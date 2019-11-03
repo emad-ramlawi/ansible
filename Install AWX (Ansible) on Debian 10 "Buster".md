@@ -2,7 +2,7 @@
 ---
 
 ### install some basic software
-apt install -y ansible docker docker-compose git python3-docker
+apt install -y ansible docker docker-compose git python3-docker ansible-tower-cli
 
 ### start docker and enable autostart
 systemctl enable docker
@@ -18,9 +18,11 @@ git clone https://github.com/ansible/awx
 cd ~/awx/installer
 
 ### changes parameters
-sed -i "s|postgres_data_dir=/tmp/pgdocker|postgres_data_dir=/var/pgdocker|g" inventory
-sed -i "s|docker_compose_dir=/tmp/awxcompose|docker_compose_dir=/var/lib/awx|g" inventory
-sed -i "s|#project_data_dir=/var/lib/awx/projects|project_data_dir=/var/awx_projects|g" inventory
+nano inventory
+
+postgres_data_dir="/var/pgdocker"
+docker_compose_dir="/var/lib/awx"
+project_data_dir=/var/awx_projects
 
 ### install awx
 ansible-playbook install.yml -i inventory
@@ -34,14 +36,14 @@ ansible-playbook install.yml -i inventory
 
 ### launch awx on reboot
 @reboot bash /root/start_awx.sh
-cd /root/.awx/awxcompose/ && docker-compose start
+cd /var/lib/awx && docker-compose start
 chmod +x /root/start_awx.sh
 
 ### stop awx 
-cd /root/.awx/awxcompose/ && docker-compose stop
+cd /var/lib/awx && docker-compose stop
 
 ### update awx
-cd /root/.awx/awxcompose/
+cd /var/lib/awx
 docker-compose stop
 docker-compose pull && docker-compose up --force-recreate -d
 
