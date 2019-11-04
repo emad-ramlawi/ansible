@@ -59,6 +59,6 @@
     command: sudo mv composer.phar /usr/local/bin/composer
     
   - name: Install Composer 4
-    command: sudo ln -s /usr/local/bin/composer /usr/bin/composer
+    command: sudo ln -sf /usr/local/bin/composer /usr/bin/composer
       
       
