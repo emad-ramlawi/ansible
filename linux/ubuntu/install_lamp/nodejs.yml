@@ -5,7 +5,6 @@
   - name: Install packages
     apt:
       name:
-      - npm
       - nodejs
       - cmdtest
       state: latest
