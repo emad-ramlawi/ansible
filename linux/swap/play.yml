@@ -6,7 +6,7 @@
       command: sudo swapoff -a 
       
     - name: Delete Swap if existing 
-      command: sudo rm -rf swapfile
+      command: sudo rm -rf /swapfile
       
     - name: create X GB swap file
       command: sudo fallocate -l {{ swap_size }}G /swapfile
