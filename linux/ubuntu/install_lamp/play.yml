@@ -1,7 +1,7 @@
 ---
 - hosts: all
   become: yes
-  tasks: 
+  tasks:  
   - name: Install packages
     apt:
       name:
@@ -48,4 +48,27 @@
       - memcached
       - libmemcached-tools
       state: latest
-      cache_valid_time: 3600    # update cache if more than an hour old
+      
+  - name: Install Composer
+      command: sudo curl -sS https://getcomposer.org/installer | php
+      command: sudo mv composer.phar /usr/local/bin/composer
+      command: sudo ln -s /usr/local/bin/composer /usr/bin/composer
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
