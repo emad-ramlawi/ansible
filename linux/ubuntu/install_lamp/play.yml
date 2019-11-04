@@ -49,26 +49,13 @@
       - libmemcached-tools
       state: latest
       
-  - name: Install Composer
+  - name: Install Composer 1
     command: sudo curl -sS https://getcomposer.org/installer | php
+    
+  - name: Install Composer 2
     command: sudo mv composer.phar /usr/local/bin/composer
+    
+  - name: Install Composer 3
     command: sudo ln -s /usr/local/bin/composer /usr/bin/composer
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
       
       
