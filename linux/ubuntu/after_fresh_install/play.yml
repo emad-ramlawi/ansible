@@ -12,7 +12,10 @@
       command: sudo apt-get dist-upgrade -y
       
     - name: update system 4
-      command: sudo add-apt-repository universe &&  sudo add-apt-repository multiverse
+      command: sudo add-apt-repository universe
+      
+    - name: update system 5
+      command: sudo add-apt-repository multiverse
    
     - name: Install packages
       apt:
