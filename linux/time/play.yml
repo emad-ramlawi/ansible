@@ -5,7 +5,7 @@
     - name: Change Timezone
       command: sudo timedatectl set-timezone {{ time_zone }}
   
-  - name: Configuring PHP Timezone
+    - name: Configuring PHP Timezone
       replace:
         path: /etc/php/7.2/apache2/php.ini
         replace: "date.timezone ="
