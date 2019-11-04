@@ -2,10 +2,11 @@
 - hosts: all
   become: yes
   tasks:  
-  - name: Install packages
-    apt:
-      name:
-      - npm
-      - nodejs
-      - cmdtest
-      state: latest
+  - name: Install nodejs 1
+    shell: curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
+    
+  - name: Install nodejs 2
+    shell: sudo apt-get install -y nodejs
+    
+  - name: Install nodejs 3
+    shell: sudo apt-get install yarn
