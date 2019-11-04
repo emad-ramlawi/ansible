@@ -50,12 +50,15 @@
       state: latest
       
   - name: Install Composer 1
-    command: sudo curl -sS https://getcomposer.org/installer | php
+    command: wget https://getcomposer.org/download/1.9.1/composer.phar
     
   - name: Install Composer 2
-    command: sudo mv composer.phar /usr/local/bin/composer
+    command: chmod +x composer.phar
     
   - name: Install Composer 3
+    command: sudo mv composer.phar /usr/local/bin/composer
+    
+  - name: Install Composer 4
     command: sudo ln -s /usr/local/bin/composer /usr/bin/composer
       
       
