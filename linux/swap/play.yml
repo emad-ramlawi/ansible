@@ -7,3 +7,24 @@
       
     - name: Delete Swap if existing 
       command: sudo rm -rf swapfile
+      
+    - name: create X GB swap file
+      command: sudo fallocate -l 2G /swapfile
+      
+    - name: chmod 600
+      command: sudo chmod 600 /swapfile
+      
+    - name: format swap
+      command: sudo mkswap /swapfile
+      
+    - name: enable swap
+      command: sudo swapon /swapfile
+      
+    - name: add to fstab
+      command: sudo echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+      
+    - name: Configuring swappiness perm
+      command: sudo echo 'vm.swappiness = 10' | sudo tee -a /etc/sysctl.conf
+      
+    - name: Configuring swappiness temp
+      command: sysctl vm.swappiness=10 && sudo sysctl -p
