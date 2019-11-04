@@ -2,14 +2,10 @@
 - hosts: all
   become: yes
   tasks:  
-  
-  - name: Install node js & node npm
-    get_url: https://deb.nodesource.com/setup_11.x | sudo -E bash -
-    uri: https://deb.nodesource.com/setup_11.x | sudo -E bash -
- 
   - name: Install packages
     apt:
       name:
+      - npm
       - nodejs
-      - yarn
+      - cmdtest
       state: latest
