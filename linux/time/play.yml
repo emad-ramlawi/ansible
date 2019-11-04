@@ -11,4 +11,4 @@
         regexp: "{{ time_zone }}"
         replace: "date.timezone ="
       with_items:
-      - 'date.timezone = {{ time_zone }}'
+      - 'date.timezone ='
