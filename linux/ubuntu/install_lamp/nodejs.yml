@@ -7,9 +7,9 @@
     become: yes
     
   - name: Install nodejs 2
-    shell: sudo apt-get install -y nodejs
+    shell: apt-get install -y nodejs
     become: yes
     
   - name: Install nodejs 3
-    shell: sudo apt-get install yarn
+    shell: apt-get install yarn
     become: yes
