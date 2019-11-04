@@ -9,7 +9,7 @@
       command: sudo rm -rf swapfile
       
     - name: create X GB swap file
-      command: sudo fallocate -l 2G /swapfile
+      command: sudo fallocate -l {{ swap_size }}G /swapfile
       
     - name: chmod 600
       command: sudo chmod 600 /swapfile
