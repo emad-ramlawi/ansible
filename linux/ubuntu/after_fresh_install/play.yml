@@ -40,4 +40,5 @@
         - p7zip
         - p7zip-full
         - p7zip-rar 
+        - aptitude
         state: latest
