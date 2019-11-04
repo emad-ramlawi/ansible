@@ -4,9 +4,12 @@
   tasks:  
   - name: Install nodejs 1
     shell: curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
+    become: yes
     
   - name: Install nodejs 2
     shell: sudo apt-get install -y nodejs
+    become: yes
     
   - name: Install nodejs 3
     shell: sudo apt-get install yarn
+    become: yes
