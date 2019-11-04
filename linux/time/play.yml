@@ -8,6 +8,7 @@
     - name: Configuring PHP Timezone
       replace:
         path: /etc/php/7.2/apache2/php.ini
+        regexp: "{{ time_zone }}"
         replace: "date.timezone ="
       with_items:
       - 'date.timezone = {{ time_zone }}'
