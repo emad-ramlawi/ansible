@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: yes
+  tasks:  
+  
+  - name: Install node js & node npm
+    command: curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
+  
+  - name: Install packages
+    apt:
+      name:
+      - nodejs
+      - yarn
+      state: latest
