@@ -1,0 +1,40 @@
+---
+- hosts: all
+  become: yes
+  tasks: 
+    - name: update system 1
+      command: sudo apt-get update
+      
+    - name: update system 2
+      command: sudo apt-get upgrade -y
+      
+    - name: update system 3
+      command: sudo apt-get dist-upgrade -y
+      
+    - name: update system 4
+      command: sudo add-apt-repository universe &&  sudo add-apt-repository multiverse
+      
+  - name: Install packages
+    apt:
+      name:
+      - ccrypt
+      - lsof
+      - net-tools
+      - htop
+      - nano
+      - wget
+      - rsync
+      - git
+      - ncdu
+      - nload
+      - mc
+      - iotop
+      - mdadm
+      - unzip
+      - iperf3
+      - mlocate
+      - tree
+      - p7zip
+      - p7zip-full
+      - p7zip-rar 
+      state: latest
