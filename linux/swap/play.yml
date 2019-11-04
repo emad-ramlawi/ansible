@@ -27,4 +27,7 @@
       command: sudo echo 'vm.swappiness = 10' | sudo tee -a /etc/sysctl.conf
       
     - name: Configuring swappiness temp
-      command: sysctl vm.swappiness=10 && sudo sysctl -p
+      command: sysctl vm.swappiness=10
+      
+    - name: Configuring swappiness temp 2
+      command: sudo sysctl -p
