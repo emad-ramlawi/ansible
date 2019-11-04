@@ -3,4 +3,4 @@
   become: yes
   tasks: 
     - name: Change Timezone
-      command: sudo timedatectl set-timezone {{ time_zone }
+      command: sudo timedatectl set-timezone {{ time_zone }}
