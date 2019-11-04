@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: yes
+  tasks: 
+    - name: Turn off Swap
+      command: sudo swapoff -a 
+      
+    - name: Delete Swap if existing 
+      command: sudo rm -rf swapfile
