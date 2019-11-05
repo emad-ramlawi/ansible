@@ -25,7 +25,7 @@
   - name: create cron
     cron:
       name: "security updates reboot"
-      user: root;
+      user: root
       minute: "30"
       hour: "1"
       day: "*"
