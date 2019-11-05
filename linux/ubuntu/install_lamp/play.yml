@@ -49,6 +49,12 @@
       - libmemcached-tools
       state: latest
       
+  - name: Apache SSL 1
+    command: a2enmod ssl 
+    
+  - name: Apache SSL 2
+    command: sudo a2ensite default-ssl
+    
   - name: Install Composer 1
     command: wget https://getcomposer.org/composer.phar
     
