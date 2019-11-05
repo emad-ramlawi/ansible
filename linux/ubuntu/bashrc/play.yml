@@ -1,11 +1,11 @@
 ---
 - hosts: all
   become: yes
-  tasks: 
-    - name: Ansible copy file to remote server
+  tasks:
+  - name: Ansible copy file force
+    copy:
       src: ../files/.bash_aliases
       dest: ~/.bashrc 
       force: yes
-      
-    - name: source ~/.bashrc
-      shell: "sudo source ~/.bashrc && sudo source ~/.bash_aliases"
+  - name: source ~/.bashrc
+    shell: "sudo source ~/.bashrc && sudo source ~/.bash_aliases"
