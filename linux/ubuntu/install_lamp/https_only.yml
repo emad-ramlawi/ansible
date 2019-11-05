@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+
+  - name: Ansible copy file force
+    copy:
+      src: ../files/000-default.conf
+      dest: /etc/apache2/sites-available/000-default.conf
+      force: yes
+      
+  - name: restart apache2
+    shell: sudo systemctl restart apache2
