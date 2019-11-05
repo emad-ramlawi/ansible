@@ -12,3 +12,17 @@
     
   - name: apt-get dist-upgrade -y
     shell: apt-get dist-upgrade -y
+
+#---
+#- hosts: all
+#  become: yes
+#  tasks:
+#    - ping: ~
+#    - name: Update APT package manager repositories cache
+#      become: true
+#      apt:
+#        update_cache: yes
+#    - name: Upgrade installed packages
+#      become: true
+#      apt:
+#        upgrade: dist
