@@ -28,8 +28,8 @@
       user: root
       minute: "30"
       hour: "1"
-      day: "*"
-      month: "15"
+      day: "15"
+      month: "*"
       weekday: "*"
       job: "shutdown -r now"
       state: present
