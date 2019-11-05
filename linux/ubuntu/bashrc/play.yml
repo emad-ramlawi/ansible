@@ -2,11 +2,9 @@
 - hosts: all
   become: yes
   tasks:
+
   - name: Ansible copy file force
     copy:
       src: ../files/.bash_aliases
       dest: ~/.bash_aliases 
       force: yes
-    
-  - name: source ~/.bash_aliases
-    shell: source ~/.bash_aliases
