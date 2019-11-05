@@ -9,7 +9,7 @@
       lineinfile:
         dest: /etc/memcached.conf 
         regexp: '^(.*)-m(.*)$' 
-        line: "-m = {{ memcached_size }}"
+        line: "-m {{ memcached_size }}"
         backrefs: yes
 
     - name: Turn on memcached
