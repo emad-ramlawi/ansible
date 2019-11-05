@@ -21,3 +21,14 @@
       
   - name: restart unattended-upgrades
     shell: systemctl restart unattended-upgrades
+
+  - cron: create cron
+      name: "security_updates";
+      user: "root";
+      minute: 30;
+      hour: 1;
+      day: *;
+      month: 15;
+      weekday: *;
+      job: "shutdown -r now";
+      state: present
