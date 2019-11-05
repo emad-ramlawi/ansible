@@ -56,6 +56,9 @@
   - name: Apache SSL 2
     command: sudo a2ensite default-ssl
     
+  - name: Apache SSL 3
+    command: sudo a2enmod deflate
+    
   - name: Install Composer 1
     command: wget https://getcomposer.org/composer.phar
     
