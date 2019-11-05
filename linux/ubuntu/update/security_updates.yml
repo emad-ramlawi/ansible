@@ -29,7 +29,7 @@
       minute: "30"
       hour: "1"
       day: "*"
-      month: 15;
+      month: "15"
       weekday: "*"
       job: "shutdown -r now"
       state: present
