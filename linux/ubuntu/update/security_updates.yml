@@ -24,11 +24,11 @@
 
   - cron: create cron
     name: "security updates reboot"
-     user: root;
-     minute: 30;
-     hour: 1;
-     day: *;
-     month: 15;
-     weekday: *;
-     job: "shutdown -r now";
-     state: present
+    user: root;
+    minute: 30;
+    hour: 1;
+    day: *;
+    month: 15;
+    weekday: *;
+    job: "shutdown -r now";
+    state: present
