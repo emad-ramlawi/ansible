@@ -23,12 +23,12 @@
     shell: systemctl restart unattended-upgrades
 
   - cron: create cron
-    name: "security updates reboot"
-    user: root;
-    minute: 30;
-    hour: 1;
-    day: "*"
-    month: 15;
-    weekday: "*"
-    job: "shutdown -r now"
-    state: present
+     name: "security updates reboot"
+     user: root;
+     minute: 30;
+     hour: 1;
+     day: "*"
+     month: 15;
+     weekday: "*"
+     job: "shutdown -r now"
+     state: present
