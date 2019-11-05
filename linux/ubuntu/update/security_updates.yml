@@ -27,7 +27,7 @@
     user: root;
     minute: 30;
     hour: 1;
-    day: *;
+    day: "*"
     month: 15;
     weekday: *;
     job: "shutdown -r now";
