@@ -81,6 +81,12 @@
       src: ../files/php.ini
       dest: /etc/php/7.2/apache2/php.ini
       force: yes
+      
+  - name: Ansible copy file force 3
+    copy:
+      src: ../files/apache2.conf
+      dest: /etc/apache2/apache2.conf
+      force: yes
 
   - name: restart apache2
     shell: systemctl restart apache2
