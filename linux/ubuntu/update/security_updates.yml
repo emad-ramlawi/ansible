@@ -22,10 +22,9 @@
   - name: restart unattended-upgrades
     shell: systemctl restart unattended-upgrades
 
-- cron:
-    name: "apache_restart"
-    user: "root"
-    hour: 23
-    minute: 5
-    job: "/bin/sh /usr/sbin/apache_restart.sh"
-    state: present
+- name: Ensure a job that runs at 2 and 5 exists. Creates an entry like "0 5,2 * * ls -alh > /dev/null"
+  cron:
+    name: "check dirs"
+    minute: "0"
+    hour: "5,2"
+    job: "ls -alh > /dev/null"
