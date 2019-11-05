@@ -6,11 +6,11 @@
   - name: apt-get clean all -y
     shell: apt-get clean all -y
       
-  - name: sudo apt-get autoclean -y 
-    shell: sudo apt-get autoclean -y 
+  - name: apt-get autoclean -y 
+    shell: apt-get autoclean -y 
     
-  - name: sudo apt-get autoremove -y
-    shell: sudo apt-get autoremove -y
+  - name: apt-get autoremove -y
+    shell: apt-get autoremove -y
     
   - name: apt install -f
     shell: apt install -f
