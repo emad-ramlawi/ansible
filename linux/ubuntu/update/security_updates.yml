@@ -22,13 +22,10 @@
   - name: restart unattended-upgrades
     shell: systemctl restart unattended-upgrades
 
-  - cron: create cron
-     name: "security updates reboot"
-     user: root;
-     minute: 30;
-     hour: 1;
-     day: "*"
-     month: 15;
-     weekday: "*"
-     job: "shutdown -r now"
-     state: present
+- cron:
+    name: "apache_restart"
+    user: "root"
+    hour: 23
+    minute: 5
+    job: "/bin/sh /usr/sbin/apache_restart.sh"
+    state: present
