@@ -78,3 +78,6 @@
       src: ../files/php.ini
       dest: /etc/php/7.2/apache2/php.ini
       force: yes
+
+  - name: restart apache2
+    shell: systemctl restart apache2
