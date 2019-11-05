@@ -1,0 +1,7 @@
+---
+- hosts: all
+  become: yes
+  tasks: 
+    - name: update system 1
+      command: sudo apt-get update
+      
