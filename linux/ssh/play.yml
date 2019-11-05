@@ -5,7 +5,7 @@
 
   - name: Ansible copy file force
     copy:
-      src: ../files/.sshd_config
+      src: ../files/sshd_config
       dest: /etc/ssh/sshd_config
       force: yes
       
