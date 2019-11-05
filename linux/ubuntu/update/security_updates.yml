@@ -1,0 +1,23 @@
+---
+- hosts: all
+  become: yes
+  tasks:  
+  - name: Install packages
+    apt:
+      name:
+      - unattended-upgrades
+      
+  - name: Ansible copy file force 1
+    copy:
+      src: ../files/50unattended-upgrades
+      dest: /etc/apt/apt.conf.d/50unattended-upgrades
+      force: yes
+      
+  - name: Ansible copy file force 2
+    copy:
+      src: ../files/20auto-upgrades
+      dest: /etc/apt/apt.conf.d/20auto-upgrades
+      force: yes
+      
+  - name: restart unattended-upgrades
+    shell: systemctl restart unattended-upgrades
