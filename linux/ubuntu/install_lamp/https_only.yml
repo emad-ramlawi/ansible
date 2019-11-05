@@ -10,4 +10,4 @@
       force: yes
       
   - name: restart apache2
-    shell: sudo systemctl restart apache2
+    shell: systemctl restart apache2
