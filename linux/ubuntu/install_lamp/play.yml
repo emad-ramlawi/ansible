@@ -47,6 +47,7 @@
       - php-memcache
       - memcached
       - libmemcached-tools
+      - ssl-cert
       state: latest
       
   - name: Apache SSL 1
