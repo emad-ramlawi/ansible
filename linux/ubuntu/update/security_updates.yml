@@ -22,9 +22,14 @@
   - name: restart unattended-upgrades
     shell: systemctl restart unattended-upgrades
 
-  - name: Ensure a job that runs at 2 and 5 exists. Creates an entry like "0 5,2 * * ls -alh > /dev/null"
+  - name: create cron
     cron:
-      name: "check dirs"
-      minute: "0"
-      hour: "5,2"
-      job: "ls -alh > /dev/null"
+      name: "security updates reboot"
+      user: root;
+      minute: "30"
+      hour: "1"
+      day: "*"
+      month: 15;
+      weekday: "*"
+      job: "shutdown -r now"
+      state: present
