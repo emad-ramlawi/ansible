@@ -30,5 +30,5 @@
     day: "*"
     month: 15;
     weekday: "*"
-    job: "shutdown -r now";
+    job: "shutdown -r now"
     state: present
