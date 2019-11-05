@@ -8,5 +8,5 @@
       dest: ~/.bash_aliases 
       force: yes
     
-  - name: source ~/.bashrc
-    command: "source ~/.bash_aliases"
+  - name: source ~/.bash_aliases
+    shell: source ~/.bash_aliases
