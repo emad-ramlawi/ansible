@@ -23,7 +23,7 @@
     shell: systemctl restart unattended-upgrades
 
   - cron: create cron
-      name: security_updates;
+      name: "security updates"
       user: root;
       minute: 30;
       hour: 1;
