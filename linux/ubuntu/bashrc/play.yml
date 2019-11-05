@@ -5,7 +5,8 @@
   - name: Ansible copy file force
     copy:
       src: ../files/.bash_aliases
-      dest: ~/.bashrc 
+      dest: ~/.bash_aliases 
       force: yes
+    
   - name: source ~/.bashrc
-    shell: "sudo source ~/.bashrc && sudo source ~/.bash_aliases"
+    command: "source ~/.bash_aliases"
