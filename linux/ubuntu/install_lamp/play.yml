@@ -66,3 +66,15 @@
       
   - name: Drush install 2
     shell: "cd /usr/local/src/drush && sudo git checkout 8.3.0 && sudo ln -sf /usr/local/src/drush/drush /usr/bin/drush && sudo composer install"
+
+  - name: Ansible copy file force 1
+    copy:
+      src: ../files/opcache.ini
+      dest: /etc/php/7.2/apache2/conf.d/10-opcache.ini
+      force: yes
+      
+  - name: Ansible copy file force 2
+    copy:
+      src: ../files/php.ini
+      dest: /etc/php/7.2/apache2/php.ini
+      force: yes
