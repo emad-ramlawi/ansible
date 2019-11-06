@@ -5,7 +5,7 @@
 
   - name: Create database super user 
     mysql_user:
-      login_user: root
+      login_unix_socket : /var/run/mysqld/mysqld.sock
       name: super
       password: "{{ mysql_password }}"
       priv: '*.*:ALL,GRANT'
