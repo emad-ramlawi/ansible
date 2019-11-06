@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+
+  - name: Ansible copy file force
+    copy:
+      src: ../files/default-ssl.conf   
+      dest:  /etc/apache2/sites-available/default-ssl.conf   
+      force: yes
+      
+  - name: restart apache
+    command: systemctl restart apache2
