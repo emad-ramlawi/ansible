@@ -7,11 +7,3 @@
         src: https://files.phpmyadmin.net/phpMyAdmin/4.9.1/phpMyAdmin-4.9.1-english.zip
         dest: /var/www/html
         remote_src: yes
-      
-    - name: rename folder
-      command: mv phpMyAdmin-4.9.1-english/ pma/
-      chdir: /var/www/html
-      
-    - name: chown folder
-      command: chown -R www-data:www-data pma/
-      chdir: /var/www/html
