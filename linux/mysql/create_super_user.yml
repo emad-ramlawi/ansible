@@ -9,4 +9,5 @@
       name: super
       password: "{{ mysql_password }}"
       priv: '*.*:ALL,GRANT'
+      update_password: always
       state: present
