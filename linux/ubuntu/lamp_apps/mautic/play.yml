@@ -8,5 +8,8 @@
         dest: /var/www/html
         remote_src: yes
 
+    - name: composer install
+      shell: chdir=/var/www/html/mautic-master/ composer install
+
     - name: chown folder
       shell: chdir=/var/www/html chown -R www-data:www-data mautic-master/
