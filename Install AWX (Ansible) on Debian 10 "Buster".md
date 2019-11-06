@@ -60,3 +60,23 @@ cd /var/lib/awx && docker-compose start
 ### source:
 https://www.andrehotzler.de/en/blog/technology/81-install-awx-ansible-on-debian-10-buster.html
 ```
+
+---
+
+*Backup and Restore AWX*
+
+---
+
+```
+tower-cli config
+nano ~/.tower_cli.cfg
+
+host: http://127.0.0.1:80
+username: admin
+password: XXXXXXXXXXX
+verify_ssl: False
+
+tower-cli receive --all > awx_backup.json
+tower-cli send awx_backup.json
+
+```
