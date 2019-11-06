@@ -50,6 +50,7 @@ chmod +x /root/stop_awx.sh
 
 ### update awx
 cd /var/lib/awx && docker-compose stop
+# bump the version twice here --> /var/lib/awx/docker-compose.yml
 docker-compose pull && docker-compose up --force-recreate -d
 
 ### change image port settings
