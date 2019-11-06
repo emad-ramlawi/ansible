@@ -51,6 +51,7 @@
       - memcached
       - libmemcached-tools
       - ssl-cert
+      - python-pymysql
       state: latest
       
   - name: Apache SSL 1
