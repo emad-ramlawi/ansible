@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+
+  - name: Create database super user 
+    mysql_user:
+      name: super
+      password: {{ mysql_password }}
+      priv: '*.*:ALL,GRANT'
+      state: present
