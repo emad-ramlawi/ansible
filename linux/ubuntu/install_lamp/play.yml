@@ -43,6 +43,9 @@
       - php7.2-bcmath
       - php7.2-imagick
       - php7.2-readline
+      - php7.2-mysql
+      - php7.2-mysqli
+      - php7.2-gd
       - php-memcached
       - php-memcache
       - memcached
