@@ -1,0 +1,8 @@
+---
+- hosts: all
+  become: yes
+  tasks: 
+  
+    - name: Restart service in all cases 1
+      service: "{{ service_name }}"
+      state: restarted
