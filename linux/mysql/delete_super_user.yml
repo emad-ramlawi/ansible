@@ -1,0 +1,12 @@
+
+---
+- hosts: all
+  become: yes
+  tasks:
+
+  - name: delete database super user 
+    mysql_user:
+      login_unix_socket : /var/run/mysqld/mysqld.sock
+      name: super
+      host: localhost
+      state: absent
