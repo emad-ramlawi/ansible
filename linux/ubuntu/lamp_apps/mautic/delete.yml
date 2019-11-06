@@ -1,0 +1,7 @@
+---
+- hosts: all
+  become: yes
+  tasks: 
+    - name: delete mautic folder
+      shell: chdir=/var/www/html rm -rf mautic-master/
+    
