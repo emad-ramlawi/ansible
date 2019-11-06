@@ -8,10 +8,10 @@
         dest: /var/www/html
         remote_src: yes
         
-  - name: rename folder
-    shell: mv phpMyAdmin-4.9.1-english/ pma/
-    chdir: /var/www/html
+    - name: rename folder
+      shell: mv phpMyAdmin-4.9.1-english/ pma/
+      chdir: /var/www/html
     
-  - name: chown folder
-    shell: chown -R www-data:www-data pma/
-    chdir: /var/www/html
+    - name: chown folder
+      shell: chown -R www-data:www-data pma/
+      chdir: /var/www/html
