@@ -10,6 +10,8 @@ systemctl enable docker
 systemctl start docker
 
 ### change default version of python to version 3
+python -V
+python3 -V
 update-alternatives --install /usr/bin/python python /usr/bin/python2.7 1
 update-alternatives --install /usr/bin/python python /usr/bin/python3 2
 
