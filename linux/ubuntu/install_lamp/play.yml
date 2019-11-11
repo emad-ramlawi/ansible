@@ -52,6 +52,8 @@
       - libmemcached-tools
       - ssl-cert
       - python-pymysql
+      - nodejs
+      - cmdtest
       state: latest
       
   - name: Apache SSL 1
@@ -105,5 +107,27 @@
       dest: /etc/apache2/apache2.conf
       force: yes
 
+  - name: Turn off memcached
+    command: systemctl stop memcached
+
+  - name: Configuring memcached size
+    lineinfile:
+      dest: /etc/memcached.conf 
+      regexp: '^(.*)-m(.*)$' 
+      line: "-m {{ memcached_size }}"
+      backrefs: yes
+
+    - name: Turn on memcached
+      command: systemctl start memcached
+     
+  - name: fix_permissions.
+    shell: chown -R www-data:www-data /var/www/html/
+
+
+
+
+
+
   - name: restart apache2
     shell: systemctl restart apache2
+      
