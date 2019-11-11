@@ -128,16 +128,16 @@
     command: a2dissite 000-default.conf 
 
 
-  - name: Ansible copy file force 5
-    copy:
-      src: ../files/default-ssl.conf
-      dest: /etc/apache2/sites-available
-      force: yes
-
-
-
-
-
+  - name: add to fstab
+    lineinfile:
+      dest: /etc/apache2/sites-available/default-ssl.conf
+      line: "<VirtualHost *:443>
+    DocumentRoot "/var/www/html/VAR_FOLDER"
+    ServerName VAR_DOMAIN_1
+    ServerAlias VAR_DOMAIN_2 
+</VirtualHost>"
+      insertafter: EOF
+      create: True
 
   - name: restart apache2
     shell: systemctl restart apache2
