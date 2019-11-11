@@ -128,13 +128,13 @@
     command: a2dissite 000-default.conf 
 
 
-  - name: add to fstab
+  - name: add to default-ssl.conf
     lineinfile:
       dest: /etc/apache2/sites-available/default-ssl.conf
-      line: "<VirtualHost *:443>
-    DocumentRoot /var/www/html/VAR_FOLDER
-    ServerName VAR_DOMAIN_1
-    ServerAlias VAR_DOMAIN_2 
+      line: "<VirtualHost *:443> >
+    DocumentRoot /var/www/html/VAR_FOLDER >
+    ServerName VAR_DOMAIN_1 >
+    ServerAlias VAR_DOMAIN_2  >
 </VirtualHost>"
       insertafter: EOF
       create: True
