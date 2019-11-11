@@ -117,8 +117,8 @@
       line: "-m {{ memcached_size }}"
       backrefs: yes
 
-    - name: Turn on memcached
-      command: systemctl start memcached
+  - name: Turn on memcached
+    command: systemctl start memcached
      
   - name: fix_permissions.
     shell: chown -R www-data:www-data /var/www/html/
