@@ -3,7 +3,7 @@
   become: yes
   tasks:  
   - git:
-      repo: "'{{ GIT_HTTPS_OR_SSH_REPO }}'"
+      repo: "{{ GIT_HTTPS_OR_SSH_REPO }}"
       dest: "{{ GIT_DESTINATION }}"
       version: "{{ GIT_BRANCH }}"
       
