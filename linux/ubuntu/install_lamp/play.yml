@@ -134,10 +134,12 @@
       state: present
       content: |
         <VirtualHost *:443>
-        DocumentRoot "/var/www/html/VAR_FOLDER_NAME"
-        ServerName VAR_DOMAIN_1
-        ServerAlias VAR_DOMAIN_2
+        DocumentRoot "/var/www/html/{{ VAR_FOLDER_NAME }}"
+        ServerName {{ VAR_DOMAIN_1 }}
+        ServerAlias {{ VAR_DOMAIN_2 }}
         </VirtualHost>
+     
+     
      
   - name: restart apache2
     shell: systemctl restart apache2
