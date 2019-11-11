@@ -50,13 +50,43 @@
         - aptitude
         state: latest
 
+    - name: Turn off Swap
+      command: sudo swapoff -a 
+      
+    - name: Delete Swap if existing 
+      command: sudo rm -rf /swapfile
+      
+    - name: create X GB swap file
+      command: sudo fallocate -l {{ swap_size }}G /swapfile
+      
+    - name: chmod 600
+      command: sudo chmod 600 /swapfile
+      
+    - name: format swap
+      command: sudo mkswap /swapfile
+      
+    - name: enable swap
+      command: sudo swapon /swapfile
+      
+    - name: add to fstab
+      lineinfile:
+        dest: /etc/fstab
+        line: "/swapfile none swap sw 0 0"
+        insertafter: EOF
+        create: True
 
-
-
-
-
-
-
+    - name: Configuring swappiness perm
+      lineinfile:
+        dest: /etc/sysctl.conf
+        line: "vm.swappiness = 10"
+        insertafter: EOF
+        create: True
+      
+    - name: Configuring swappiness temp
+      command: sysctl vm.swappiness=10
+      
+    - name: Configuring swappiness temp 2
+      command: sudo sysctl -p
 
     - name: Ansible copy file force
       copy:
