@@ -127,14 +127,18 @@
   - name: Turn off vhost 1
     command: a2dissite 000-default.conf 
 
-
   - name: add to default-ssl.conf
-    lineinfile:
+    blockinfile:
       dest: /etc/apache2/sites-available/default-ssl.conf
-      src: ../files/default-ssl.conf 
       insertafter: EOF
-      create: True
-
+      state: present
+      content: |
+        <VirtualHost *:443>
+        DocumentRoot "/var/www/html/VAR_FOLDER_NAME"
+        ServerName VAR_DOMAIN_1
+        ServerAlias VAR_DOMAIN_2
+        </VirtualHost>
+     
   - name: restart apache2
     shell: systemctl restart apache2
       
