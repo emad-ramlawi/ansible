@@ -49,6 +49,20 @@
         - p7zip-rar 
         - aptitude
         state: latest
-        
-        
-       
+
+
+
+
+
+
+
+
+
+    - name: Ansible copy file force
+      copy:
+        src: ../files/sshd_config
+        dest: /etc/ssh/sshd_config
+        force: yes
+      
+    - name: restart sshd
+      shell: systemctl restart sshd
