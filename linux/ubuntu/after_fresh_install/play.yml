@@ -88,6 +88,9 @@
     - name: Configuring swappiness temp 2
       command: sudo sysctl -p
 
+    - name: Change Timezone
+      command: sudo timedatectl set-timezone {{ time_zone }}
+
     - name: Ansible copy file force
       copy:
         src: ../files/sshd_config
@@ -96,3 +99,5 @@
       
     - name: restart sshd
       shell: systemctl restart sshd
+      
+      
