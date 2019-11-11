@@ -3,9 +3,9 @@
   become: yes
   tasks:  
   - git:
-      repo: '{{ GIT_HTTPS_OR_SSH_REPO }}'
-      dest: {{ GIT_DESTINATION }}
-      version: {{ GIT_BRANCH }}
+      repo: "'{{ GIT_HTTPS_OR_SSH_REPO }}'"
+      dest: "{{ GIT_DESTINATION }}"
+      version: "{{ GIT_BRANCH }}"
       
   - name: fix_permissions.
     shell: chown -R www-data:www-data /var/www/html/
