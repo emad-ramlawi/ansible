@@ -5,9 +5,9 @@
  
     - name: Ansible copy file force
       copy:
-      src: ../files/.bash_aliases
-      dest: ~/.bash_aliases 
-      force: yes
+        src: ../files/.bash_aliases
+        dest: ~/.bash_aliases 
+        force: yes
 
     - name: update system 1
       command: sudo apt-get update
