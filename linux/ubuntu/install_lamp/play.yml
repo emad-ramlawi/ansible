@@ -132,7 +132,7 @@
     lineinfile:
       dest: /etc/apache2/sites-available/default-ssl.conf
       line: "<VirtualHost *:443>
-    DocumentRoot "/var/www/html/VAR_FOLDER"
+    DocumentRoot /var/www/html/VAR_FOLDER
     ServerName VAR_DOMAIN_1
     ServerAlias VAR_DOMAIN_2 
 </VirtualHost>"
