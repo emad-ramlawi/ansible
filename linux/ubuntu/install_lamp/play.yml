@@ -244,7 +244,7 @@
       src: https://files.phpmyadmin.net/phpMyAdmin/4.9.1/phpMyAdmin-4.9.1-english.zip      
       dest: /var/www/html      
       remote_src: yes
-      shell: chdir=/var/www/html mv phpMyAdmin-4.9.1-english/ pma/
-      shell: chdir=/var/www/html chown -R www-data:www-data pma/
+      shell: chdir="/var/www/html" mv phpMyAdmin-4.9.1-english/ pma/
+      shell: chdir="/var/www/html" chown -R www-data:www-data pma/
       when: {{ install_pma }} == yes
       
