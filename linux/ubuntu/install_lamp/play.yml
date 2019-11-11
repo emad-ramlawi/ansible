@@ -241,10 +241,9 @@
     
   - name: Unarchive a file that needs to be downloaded
     unarchive:
-      src: https://files.phpmyadmin.net/phpMyAdmin/4.9.1/phpMyAdmin-4.9.1-english.zip
-      dest: (/var/www/html{{ VAR_FOLDER_1 }}|/var/www/html{{ VAR_FOLDER_2 }}|/var/www/html{{ VAR_FOLDER_3 }}|/var/www/html{{ VAR_FOLDER_4 }}|/var/www/html{{ VAR_FOLDER_5 }}|/var/www/html{{ VAR_FOLDER_6 }}|/var/www/html{{ VAR_FOLDER_7 }}|/var/www/html{{ VAR_FOLDER_8 }})
+      src: https://files.phpmyadmin.net/phpMyAdmin/4.9.1/phpMyAdmin-4.9.1-english.zip      dest: (/var/www/html{{ VAR_FOLDER_1 }}|/var/www/html{{ VAR_FOLDER_2 }}|/var/www/html{{ VAR_FOLDER_3 }}|/var/www/html{{ VAR_FOLDER_4 }}|/var/www/html{{ VAR_FOLDER_5 }}|/var/www/html{{ VAR_FOLDER_6 }}|/var/www/html{{ VAR_FOLDER_7 }}|/var/www/html{{ VAR_FOLDER_8 }})
       remote_src: yes
-      shell: chdir=/var/www/html/({{ VAR_FOLDER_1 }}|{{ VAR_FOLDER_2 }}|{{ VAR_FOLDER_3 }}|{{ VAR_FOLDER_4 }}|{{ VAR_FOLDER_5 }}|{{ VAR_FOLDER_6 }}|{{ VAR_FOLDER_7 }}|{{ VAR_FOLDER_8 }}) mv phpMyAdmin-4.9.1-english/ pma/
-      shell: chdir=/var/www/html/({{ VAR_FOLDER_1 }}|{{ VAR_FOLDER_2 }}|{{ VAR_FOLDER_3 }}|{{ VAR_FOLDER_4 }}|{{ VAR_FOLDER_5 }}|{{ VAR_FOLDER_6 }}|{{ VAR_FOLDER_7 }}|{{ VAR_FOLDER_8 }}) chown -R www-data:www-data pma/
+      shell: chdir=/var/www/html mv phpMyAdmin-4.9.1-english/ pma/
+      shell: chdir=/var/www/html chown -R www-data:www-data pma/
       when: {{ install_pma }} == yes
       
