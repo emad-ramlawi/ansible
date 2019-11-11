@@ -10,19 +10,19 @@
         force: yes
 
     - name: update system 1
-      command: sudo apt-get update
+      command: apt-get update
       
     - name: update system 2
-      command: sudo apt-get upgrade -y
+      command: apt-get upgrade -y
       
     - name: update system 3
-      command: sudo apt-get dist-upgrade -y
+      command: apt-get dist-upgrade -y
       
     - name: update system 4
-      command: sudo add-apt-repository universe
+      command: add-apt-repository universe
       
     - name: update system 5
-      command: sudo add-apt-repository multiverse
+      command: add-apt-repository multiverse
    
     - name: Install packages
       apt:
