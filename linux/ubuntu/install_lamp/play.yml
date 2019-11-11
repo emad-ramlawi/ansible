@@ -124,8 +124,8 @@
   - name: fix_permissions.
     shell: chown -R www-data:www-data /var/www/html/
 
-  - name: Turn off vhost 1
-    command: a2dissite 000-default.conf 
+#  - name: Turn off vhost 1
+#    command: a2dissite 000-default.conf 
 
   - name: add to default-ssl.conf
     blockinfile:
@@ -134,12 +134,107 @@
       state: present
       content: |
         <VirtualHost *:443>
-        DocumentRoot "/var/www/html/{{ VAR_FOLDER_NAME }}"
+        DocumentRoot "/var/www/html/{{ VAR_FOLDER_1 }}"
         ServerName {{ VAR_DOMAIN_1 }}
-        ServerAlias {{ VAR_DOMAIN_2 }}
+        ServerAlias {{ VAR_ALIAS_1 }}
+        </VirtualHost>
+        
+        <VirtualHost *:443>
+        DocumentRoot "/var/www/html/{{ VAR_FOLDER_2 }}"
+        ServerName {{ VAR_DOMAIN_2 }}
+        ServerAlias {{ VAR_ALIAS_2 }}
+        </VirtualHost>
+     
+        <VirtualHost *:443>
+        DocumentRoot "/var/www/html/{{ VAR_FOLDER_3 }}"
+        ServerName {{ VAR_DOMAIN_3 }}
+        ServerAlias {{ VAR_ALIAS_3 }}
+        </VirtualHost>
+        
+        <VirtualHost *:443>
+        DocumentRoot "/var/www/html/{{ VAR_FOLDER_4 }}"
+        ServerName {{ VAR_DOMAIN_4 }}
+        ServerAlias {{ VAR_ALIAS_4 }}
+        </VirtualHost>
+     
+        <VirtualHost *:443>
+        DocumentRoot "/var/www/html/{{ VAR_FOLDER_5 }}"
+        ServerName {{ VAR_DOMAIN_5 }}
+        ServerAlias {{ VAR_ALIAS_5 }}
+        </VirtualHost>
+        
+        <VirtualHost *:443>
+        DocumentRoot "/var/www/html/{{ VAR_FOLDER_6 }}"
+        ServerName {{ VAR_DOMAIN_6 }}
+        ServerAlias {{ VAR_ALIAS_6 }}
+        </VirtualHost>
+     
+        <VirtualHost *:443>
+        DocumentRoot "/var/www/html/{{ VAR_FOLDER_7 }}"
+        ServerName {{ VAR_DOMAIN_7 }}
+        ServerAlias {{ VAR_ALIAS_7 }}
+        </VirtualHost>
+     
+        <VirtualHost *:443>
+        DocumentRoot "/var/www/html/{{ VAR_FOLDER_8 }}"
+        ServerName {{ VAR_DOMAIN_8 }}
+        ServerAlias {{ VAR_ALIAS_8 }}
         </VirtualHost>
      
      
+  - name: add to 000-default.conf
+    blockinfile:
+      dest: /etc/apache2/sites-available/000-default.conf
+      insertafter: EOF
+      state: present
+      content: |
+        <VirtualHost *:80>
+        DocumentRoot "/var/www/html/{{ VAR_FOLDER_1 }}"
+        ServerName {{ VAR_DOMAIN_1 }}
+        ServerAlias {{ VAR_ALIAS_1 }}
+        </VirtualHost>
+        
+        <VirtualHost *:80>
+        DocumentRoot "/var/www/html/{{ VAR_FOLDER_2 }}"
+        ServerName {{ VAR_DOMAIN_2 }}
+        ServerAlias {{ VAR_ALIAS_2 }}
+        </VirtualHost>
+     
+        <VirtualHost *:80>
+        DocumentRoot "/var/www/html/{{ VAR_FOLDER_3 }}"
+        ServerName {{ VAR_DOMAIN_3 }}
+        ServerAlias {{ VAR_ALIAS_3 }}
+        </VirtualHost>
+        
+        <VirtualHost *:80>
+        DocumentRoot "/var/www/html/{{ VAR_FOLDER_4 }}"
+        ServerName {{ VAR_DOMAIN_4 }}
+        ServerAlias {{ VAR_ALIAS_4 }}
+        </VirtualHost>
+     
+        <VirtualHost *:80>
+        DocumentRoot "/var/www/html/{{ VAR_FOLDER_5 }}"
+        ServerName {{ VAR_DOMAIN_5 }}
+        ServerAlias {{ VAR_ALIAS_5 }}
+        </VirtualHost>
+        
+        <VirtualHost *:80>
+        DocumentRoot "/var/www/html/{{ VAR_FOLDER_6 }}"
+        ServerName {{ VAR_DOMAIN_6 }}
+        ServerAlias {{ VAR_ALIAS_6 }}
+        </VirtualHost>
+     
+        <VirtualHost *:80>
+        DocumentRoot "/var/www/html/{{ VAR_FOLDER_7 }}"
+        ServerName {{ VAR_DOMAIN_7 }}
+        ServerAlias {{ VAR_ALIAS_7 }}
+        </VirtualHost>
+     
+        <VirtualHost *:80>
+        DocumentRoot "/var/www/html/{{ VAR_FOLDER_8 }}"
+        ServerName {{ VAR_DOMAIN_8 }}
+        ServerAlias {{ VAR_ALIAS_8 }}
+        </VirtualHost>
      
   - name: restart apache2
     shell: systemctl restart apache2
