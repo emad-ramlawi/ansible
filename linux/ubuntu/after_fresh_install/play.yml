@@ -3,8 +3,8 @@
   become: yes
   tasks: 
  
-  - name: Ansible copy file force
-    copy:
+    - name: Ansible copy file force
+      copy:
       src: ../files/.bash_aliases
       dest: ~/.bash_aliases 
       force: yes
