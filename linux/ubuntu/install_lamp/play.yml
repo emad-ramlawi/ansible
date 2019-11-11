@@ -114,7 +114,7 @@
   - name: Configuring memcached size
     lineinfile:
       dest: /etc/memcached.conf 
-      regexp: '^(.*)-m(.*)$' 
+      regexp: '^(.*)-m 64(.*)$' 
       line: "-m {{ memcached_size }}"
       backrefs: yes
 
