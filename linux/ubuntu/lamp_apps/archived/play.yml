@@ -5,8 +5,8 @@
   
     - name: Unarchive a file that needs to be downloaded
       unarchive:
-        src: {{ HTTP_DIRECT_LINK }}
-        dest: {{ DR_DESTINATION }}
+        src: "{{ HTTP_DIRECT_LINK }}"
+        dest: "{{ DR_DESTINATION }}"
         remote_src: yes
 
     - name: fix_permissions.
