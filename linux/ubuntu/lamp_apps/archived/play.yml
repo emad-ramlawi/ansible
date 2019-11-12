@@ -8,7 +8,6 @@
         src: "{{ HTTP_DIRECT_LINK }}"
         dest: "{{ DR_DESTINATION }}"
         remote_src: yes
-        creates: yes
         
     - name: fix_permissions.
       shell: chown -R www-data:www-data /var/www/html/
