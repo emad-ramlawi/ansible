@@ -9,5 +9,5 @@
         dest: {{ DR_DESTINATION }}
         remote_src: yes
 
-  - name: fix_permissions.
-    shell: chown -R www-data:www-data /var/www/html/
+    - name: fix_permissions.
+      shell: chown -R www-data:www-data /var/www/html/
