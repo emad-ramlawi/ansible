@@ -180,8 +180,19 @@
         ServerName {{ VAR_DOMAIN_8 }}
         ServerAlias {{ VAR_ALIAS_8 }}
         </VirtualHost>
-     
-     
+        
+        <VirtualHost *:443>
+        DocumentRoot "/var/www/html/{{ VAR_FOLDER_9 }}"
+        ServerName {{ VAR_DOMAIN_9 }}
+        ServerAlias {{ VAR_ALIAS_9 }}
+        </VirtualHost>
+        
+        <VirtualHost *:443>
+        DocumentRoot "/var/www/html/{{ VAR_FOLDER_10 }}"
+        ServerName {{ VAR_DOMAIN_10 }}
+        ServerAlias {{ VAR_ALIAS_10 }}
+        </VirtualHost>
+        
   - name: add to 000-default.conf
     blockinfile:
       dest: /etc/apache2/sites-available/000-default.conf
@@ -234,6 +245,18 @@
         DocumentRoot "/var/www/html/{{ VAR_FOLDER_8 }}"
         ServerName {{ VAR_DOMAIN_8 }}
         ServerAlias {{ VAR_ALIAS_8 }}
+        </VirtualHost>
+     
+        <VirtualHost *:80>
+        DocumentRoot "/var/www/html/{{ VAR_FOLDER_9 }}"
+        ServerName {{ VAR_DOMAIN_9 }}
+        ServerAlias {{ VAR_ALIAS_9 }}
+        </VirtualHost>
+        
+        <VirtualHost *:80>
+        DocumentRoot "/var/www/html/{{ VAR_FOLDER_10 }}"
+        ServerName {{ VAR_DOMAIN_10 }}
+        ServerAlias {{ VAR_ALIAS_10 }}
         </VirtualHost>
      
   - name: restart apache2
