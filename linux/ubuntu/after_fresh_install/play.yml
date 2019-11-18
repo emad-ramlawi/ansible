@@ -24,6 +24,9 @@
     - name: update system 5
       command: add-apt-repository multiverse
    
+    - name: Install required pkgs manually
+      command: apt-get install -y python-apt aptitude
+   
     - name: Install packages
       apt:
         name:
