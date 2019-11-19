@@ -1,0 +1,28 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+  - name: create folder
+    win_file:
+     path: C:\AnsTemp
+     state: directory
+     force: yes
+  - name: Copy
+    win_copy:
+     src: ../timesync/SyncTime.bat
+     dest: C:\AnsTemp\
+     force: yes
+  - name: Copy
+    win_copy:
+     src: ../timesync/SyncTime.xml
+     dest: C:\AnsTemp\
+     force: yes
+  - name: sceduled task
+    become_method: runas
+    win_command: C:\AnsTemp\SyncTime.bat
+    become: yes
+    become_user: apex-admin
+  - name: remove
+    win_file:
+     path: C:\AnsTemp
+     state: absent
