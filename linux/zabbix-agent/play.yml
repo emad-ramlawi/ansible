@@ -1,0 +1,23 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install required pkgs manually
+      command: sudo apt-get install -y python-apt aptitude
+  
+    - name: Install packages
+      apt:
+        name:
+        - zabbix-agent
+        state: latest
+
+    - name: Ansible copy file force
+      copy:
+        src: ../files/zabbix_agentd.conf
+        dest: /etc/zabbix/zabbix_agentd.conf
+        force: yes
+        
+    - name: Restart service in all cases 1
+      service: 
+        name: zabbix-agent
+        state: restarted
