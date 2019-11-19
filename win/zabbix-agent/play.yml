@@ -1,0 +1,18 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Install zabbix-agent
+      win_chocolatey:
+        name: zabbix-agent
+        state: present
+        version: '4.4.1'
+    - name: Ansible copy file force
+      win_copy:
+        src: ../win_files/zabbix_agentd.conf
+        dest: C:\ProgramData\zabbix\zabbix_agentd.conf
+        force: yes
+    - name: Restart service in all cases 1
+      win_service: 
+        name: "Zabbix Agent"
+        state: restarted
