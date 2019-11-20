@@ -2,11 +2,8 @@
 - hosts: all
   become: yes
   tasks: 
-    - name: shutdown awx safely 1
-      command: bash /root/stop_awx.sh
-
-    - name: shutdown awx safely 2
-      shell: chdir=/var/lib/awx docker-compose stop
+ #   - name: shutdown awx safely 2
+ #     shell: chdir=/var/lib/awx docker-compose stop
 
     - name: wait 30 sec
       command: sleep 30
