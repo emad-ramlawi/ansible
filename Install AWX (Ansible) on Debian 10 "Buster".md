@@ -27,7 +27,7 @@ postgres_data_dir="/var/pgdocker"
 docker_compose_dir="/var/lib/awx"
 project_data_dir=/var/awx_projects
 
-### Due to errors, we use latest Ansible 2.9.2 from Ubuntu repo:
+### Due to errors, we now use latest Ansible 2.9.2 from Ubuntu repo:
 echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu bionic main" | tee -a /etc/apt/sources.list
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
 apt update
