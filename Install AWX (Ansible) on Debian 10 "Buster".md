@@ -3,7 +3,7 @@
 ---
 
 ### install some basic software
-apt install -y ansible docker docker-compose git python3-docker ansible-tower-cli
+apt install -y docker docker-compose git python3-docker ansible-tower-cli
 
 ### start docker and enable autostart
 systemctl enable docker
@@ -26,6 +26,13 @@ nano inventory
 postgres_data_dir="/var/pgdocker"
 docker_compose_dir="/var/lib/awx"
 project_data_dir=/var/awx_projects
+
+### Due to errors, we use latest Ansible 2.9.2 from Ubuntu repo:
+echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu bionic main" | tee -a /etc/apt/sources.list
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
+apt update
+apt install ansible -y
+ansible --version
 
 ### install awx
 ansible-playbook install.yml -i inventory
