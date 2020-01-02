@@ -3,7 +3,7 @@
 ---
 
 ### install some basic software
-apt install -y docker docker-compose git python3-docker ansible-tower-cli
+apt install -y docker docker-compose git python3-docker ansible-tower-cli gnupg2
 
 ### start docker and enable autostart
 systemctl enable docker
