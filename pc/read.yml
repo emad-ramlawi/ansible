@@ -4,4 +4,4 @@
   gather_facts: no
   tasks: 
     - name: cat the file
-      command: cat /home/vach/ids/ip2location/whitelist/IDebitIPCountryListLocal.properties
+      with_file: cat /home/vach/ids/ip2location/whitelist/IDebitIPCountryListLocal.properties
