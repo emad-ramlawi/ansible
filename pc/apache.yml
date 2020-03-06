@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: yes
+  tasks: 
+  
+    - name: Configuring Apache Port 
+      lineinfile:
+        dest: /etc/httpd/conf/httpd.conf
+        regexp: '^(.*)Listen(.*)$' 
+        line: "Listen {{ PORT_VARIABLE }}"
+        backrefs: yes
