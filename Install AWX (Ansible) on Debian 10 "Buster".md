@@ -6,7 +6,7 @@
 apt-get update -y && sleep 5 && sudo apt-get upgrade -y && sleep 5 && sudo apt-get dist-upgrade -y
 apt install -y git python3-docker ansible-tower-cli gnupg2 nano htop nload mc
 
-sudo apt-get install \
+sudo apt-get install -y \
     apt-transport-https \
     ca-certificates \
     curl \
