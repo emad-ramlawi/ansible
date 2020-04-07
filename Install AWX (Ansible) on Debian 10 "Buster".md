@@ -57,6 +57,7 @@ ansible-playbook install.yml -i inventory
 
 ### ubuntu unable to load docker-compose error
 sudo apt install python-pip
+sudo apt install python3-pip
 pip install --upgrade setuptools
 pip install wheel
 pip install docker-compose
