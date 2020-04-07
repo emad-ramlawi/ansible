@@ -56,9 +56,10 @@ ansible --version
 ansible-playbook install.yml -i inventory
 
 ### ubuntu unable to load docker-compose error
-sudo curl -L "https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-sudo ln -fs /usr/local/bin/docker-compose /usr/bin/docker-compose
+sudo apt install python-pip
+pip install --upgrade setuptools
+pip install wheel
+pip install docker-compose
 ```
 ---
 
