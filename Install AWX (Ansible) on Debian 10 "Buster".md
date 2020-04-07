@@ -3,7 +3,19 @@
 ---
 
 ### install some basic software
-apt install -y docker docker-compose git python3-docker ansible-tower-cli gnupg2
+apt-get update -y && sleep 5 && sudo apt-get upgrade -y && sleep 5 && sudo apt-get dist-upgrade -y
+apt install -y git python3-docker ansible-tower-cli gnupg2 nano htop nload mc
+
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
+    
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+
+apt-get install docker-ce docker-ce-cli containerd.io docker-compose
 
 ### start docker and enable autostart
 systemctl enable docker
