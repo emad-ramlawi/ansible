@@ -57,9 +57,7 @@ ansible test -i inventory.qa -m ping
 7)  Clone the repo :
 
 ```
-git clone git@bitbucket.org:paramountcommercecom/ansible.git
 cd ansible/roles/tomcat
-
 ```
 
 
@@ -73,17 +71,11 @@ vars/main.yml.sample
 
 
 
-Ensure you have the correct hosts specified, and that ansible controller can reach the target using ssh key exchange, then run:
+9) Ensure you have the correct hosts specified, and that ansible controller can reach the target using ssh key exchange, then run:
 
 ```
-ansible-playbook -i inventory.qa -l kvm_test main.yml --extra-vars "@vars/main.yml"
 ansible-playbook -i inventory.qa -l kvm_test main.yml --extra-vars "@vars/main.yml" --ask-vault-pass
-
 ```
-
-
-
-Also be sure to edit/check the vars/main.yml first.
 
 
 
