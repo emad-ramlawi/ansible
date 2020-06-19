@@ -1,0 +1,111 @@
+---
+- hosts: all
+  become: yes
+  tasks: 
+    
+    - name: Add desired user 
+      user:
+        name: "{{ username }}"
+        comment: new user
+
+    - name: Cleanup 3
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+        - /opt/apache-tomcat-7.0.104
+        - /opt/apache-tomcat-7.0.104_{{ appname }}
+        - /opt/app-scripts
+        - /opt/app-scripts-repo
+
+    - name: apache tomcat 7 download
+      unarchive:
+        src: "https://mirror.csclub.uwaterloo.ca/apache/tomcat/tomcat-7/v7.0.104/bin/apache-tomcat-7.0.104.zip"
+        dest: "/opt/"
+        remote_src: yes
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        
+    - name: Rename dir to add product name
+      command: mv /opt/apache-tomcat-7.0.104 /opt/apache-tomcat-7.0.104_{{ appname }}
+
+    - name: ensure a list of packages installed
+      yum:
+        name: "{{ packages }}"
+      vars:
+        packages:
+        - git
+        - python-boto3
+
+    - name: Add Git Key
+      copy:
+        src: "../vault/git_key"
+        dest: "/home/{{ username }}/git_key"
+        remote_src: no
+        owner: "{{ username }}" 
+        group: "{{ username }}"
+        mode: 0400
+
+    - name: Clone a private repository into /opt
+      git:
+        repo: git@bitbucket.org:paramountcommercecom/app-scripts.git
+        version: master
+        dest: /opt/app-scripts-repo
+        key_file: "/home/{{ username }}/git_key"
+        accept_hostkey: yes
+
+    - name: Copy file with owner and permissions
+      copy:
+        src: /opt/app-scripts-repo/{{ username }}/scripts/
+        dest: /opt/app-scripts
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        mode: '0777'
+        remote_src: yes
+
+    - name: Remove Git Key
+      file:
+        path: "/home/{{ username }}/git_key"
+        state: absent
+
+    - name: chmod +x tomcat bin
+      file:
+        path: "/opt/apache-tomcat-7.0.104_{{ appname }}/bin"
+        mode: '0777'
+        recurse: yes
+
+    - name: S3 download redis_libs
+      aws_s3:
+        region: ca-central-1
+        bucket: ids.ansible.artifcats
+        object: redis_lib.zip
+        dest: "/home/{{ username }}/redis_lib.zip"
+        mode: get
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+
+    - name: Unarchive redis_libs
+      unarchive:
+        src: "/home/{{ username }}/redis_lib.zip"
+        dest: "/opt/apache-tomcat-7.0.104_{{ appname }}/lib"
+        remote_src: yes
+        owner: "{{ username }}"
+        group: "{{ username }}"
+
+    - name: Template file redis-data-cache.properties
+      template:
+        src: "../templates/redis-data-cache.properties.j2"
+        dest: "/opt/apache-tomcat-7.0.104_{{ appname }}/conf/redis-data-cache.properties"
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        mode: '0755'
+        remote_src: no
+
+    - name: Template file setenv.sh
+      template:
+        src: "../templates/setenv.sh.j2"
+        dest: "/opt/apache-tomcat-7.0.104_{{ appname }}/bin/setenv.sh"
+        owner: "{{ username }}"
+        group: "{{ username }}"
+        mode: '0777'
+        remote_src: no

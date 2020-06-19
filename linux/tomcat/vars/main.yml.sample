@@ -1,0 +1,16 @@
+#Please rename and remove the .sample
+---
+# Can be mazooma/MAZ or vach/VACH
+username: ""
+appname: ""
+
+# For accessing s3 bucket "ids.ansible.artifcats"
+aws_access_key: ""
+aws_secret_key: ""
+
+# Redis vars
+redis_host: ""
+redis_pass: ""
+
+# App Encyption config key
+appconfigkey: ""

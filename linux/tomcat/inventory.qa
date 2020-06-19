@@ -1,0 +1,2 @@
+[test]
+kvm_test ansible_host=192.168.8.253 ansible_port=22 ansible_user=ec2-user
