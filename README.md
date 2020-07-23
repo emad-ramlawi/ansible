@@ -1,25 +1,137 @@
-### Ansible Tricks and Tips
+### Amazon Linux 2 Setup:
 
 
 
-Make sure target(s) has the public SSH key of the controller (AWX) machine installed + python/python3 installed.
+There are 2 parts of this process, Setup the repo "Controller" then Setup the local testing machine/client "Target".
+
+Moving forwards we will reference  the machine that clones the repo and runs Ansible on clients as the "Controller".
+and any the machine that Ansible executes on as the "Target". We will need to setup the target part first to get the IP of the target.
+
+
+
+#### A) Setup the local testing machine/client "Target":
+
+Download and run AL2 locally using your preferred hyper-visor, for example KVM (linux) or VirtualBox (windows).
+
+
+
+1) Download the KVM qcow2 image:
+
+https://cdn.amazonlinux.com/os-images/2.0.20200304.0/kvm/
+
+
+
+2) Install KVM hypervisor and run a couple of checks, kvm-ok should output KVM acceleration can be used and the grep should show the # of cpu cores. 
+
+````
+sudo apt install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virtinst virt-manager cpu-checker
+kvm-ok
+grep -Eoc '(vmx|svm)' /proc/cpuinfo
+````
+
+If you have issue with the last 2 commands, check your machine BIOS and ensure virtualisation technology is enabled.
+
+
+
+3)  Locate new program installed called Virtual Machine Manager --> open it --> File --> New VM --> Import existing disk image --> Browse --> Browse Local --> Select the downloaded file
+
+then in the same window choose the operation system as "Redhat Enterprise Linux 7" --> Keep pressing Forward and Accept the defaults till you reach Finish, and start the VM.
+
+
+
+4) Reset the VM root/ec2-user password by booting into grub menu press 'e' 
+
+look at the line below that **ro** and change it with 
+**rw init=/sysroot/bin/sh** look at the picture below, then when done press "Control + x" on your keyboard and give it some seconds to enter single mode.
+
+ 
+
+
+
+<img src="/home/medo/.config/Typora/typora-user-images/image-20200723124152066.png" alt="image-20200723124152066" style="zoom: 80%;" />
+
+
+
+then run
 
 ```
-ssh root@target
-nano ~/.ssh/authorized_keys
-#add awx pub key
+chroot /sysroot
+passwd root
+touch /.autorelabel
+exit
+reboot 
 ```
 
-If you want to use hostnames and not IPs, be sure to add the the hostnames in AWS /etc/hosts:
-
+Now you can reboot and access with root user, notice first boot will connect to the internet and create the ec2-user, so wait for a couple of mins then try to login by pressing enter, then run
 
 ```
-nano /etc/hosts
+passwd ec2-user
 ```
 
 
 
-### Debian and Ubuntu Setup
+5) Last steps is to take note of the IP of the test target and add ensure the controller can access the  target using ssh by adding the controller SSH pub key to the target. Optionally
+
+edit `etc/ssh/sshd_config` to allow "PasswordAuthentication"  and restart the sshd service, so you can go to the controller and run this and it work ask for password:
+
+`ssh ec2-user@ansible_taget_ip`
+
+
+
+6) It is highly recommended to take snapshot in this golden fresh target status. Shutdown the target and open Virtual Machine Manager and click the last icon on the right then the plus sign.
+
+
+
+#### B) Setup the repo "Controller":
+
+
+
+ Install ansible and clone the repo :
+
+```
+sudo apt install ansible
+git clone git@bitbucket.org:paramountcommercecom/ansible.git
+cd ansible
+```
+
+
+
+Edit the following files:
+
+- inv/qa -->  add your targets IP.
+- main.yml -> select the roles you wish to run by commenting out.
+- vars/main.yml --> modify the vars to your desired output then encrypt it for better security. You will need to replace any entry labelled with "xxxxxxxx"
+
+```
+vim inv/qa 
+vim main.yml
+vim vars/main.yml
+ansible-vault encrypt vars/main.yml
+```
+
+
+
+Ensure that you can reach the target without issues, you should receive a pong 
+
+```
+ansible test -i inv/qa -m ping
+```
+
+
+
+Run Ansible:
+
+```
+ansible-playbook -i inv/qa -l kvm_test main.yml --extra-vars "@vars/main.yml" --ask-vault-pass
+```
+
+
+
+---
+
+
+
+### Debian and Ubuntu AWX Setup:
 
 
 
@@ -140,6 +252,10 @@ tower-cli receive --all > awx_backup.json
 tower-cli send awx_backup.json
 
 ```
+
+
+
+----
 
 
 
