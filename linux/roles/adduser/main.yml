@@ -1,0 +1,9 @@
+---
+- hosts: all
+  become: yes
+  tasks: 
+    
+    - name: Add desired user 
+      user:
+        name: "{{ adduser_username }}"
+        comment: new user

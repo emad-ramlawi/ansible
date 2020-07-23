@@ -1,0 +1,7 @@
+---
+# For accessing s3 bucket "ids.ansible.artifcats"
+aws_access_key: "xxxxxxxxxxxx"
+aws_secret_key: "xxxxxxxxxxxx"
+
+# Jave version so you know what version we are using
+java_version: "1.8.0_251"

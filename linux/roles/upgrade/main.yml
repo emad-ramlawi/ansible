@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: yes
+  tasks: 
+    
+    - name: upgrade all packages, with exclude support
+      yum:
+        name: '*'
+        state: latest
+        exclude: "{{ upgrade_exclude_packages }}"

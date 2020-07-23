@@ -1,0 +1,27 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+
+    - name: Add EPEL Repo
+      command: "amazon-linux-extras install epel -y"
+
+    - name: Install packages
+      yum:
+        name:
+        - nagios-plugins-all
+        - nagios-plugins-nrpe
+        - nrpe
+
+    - name: Configuring allowed_hosts
+      lineinfile:
+        dest: /etc/nagios/nrpe.cfg
+        regexp: '^(.*)allowed_hosts(.*)$' 
+        line: "allowed_hosts= {{ nagios_allowed_hosts }}"
+        backrefs: yes
+
+    - name: enable nagios
+      command: "systemctl enable nrpe"
+      
+    - name: start nagios
+      command: "systemctl start nrpe"

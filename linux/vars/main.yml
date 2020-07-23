@@ -1,0 +1,53 @@
+# timezone + adduser + hostname VARS
+timezone: "America/Toronto"
+adduser_username: "vach"  # can be mazooma/idebit/instadebit/...etc
+hostname: "ansible-test-target"
+
+# Java:
+java_version: "1.8.0_251"
+
+# AWS for accessing s3 bucket "ids.ansible.artifcats"
+aws_access_key: "xxxxxxxxxxxx"
+aws_secret_key: "xxxxxxxxxxxx"
+
+# Tomcat:
+tomcat_username: "vach"
+tomcat_appname: "VACH"
+tomcat_version: "7.0.105"
+tomcat_dl: "https://mirror.csclub.uwaterloo.ca/apache/tomcat/tomcat-7/v7.0.105/bin/apache-tomcat-7.0.105.zip"
+tomcat_appconfigkey: "xxxxxxxxxxxx"
+tomcat_service_name: "tomcat_vach_7.0.105"
+tomcat_xms: "128"
+tomcat_xmx: "2048"
+tomcat_XX: "512"
+tomcat_debugport: "7005"
+
+# Redis:
+redis_host: "127.0.0.1"
+redis_pass: ""
+
+# Git:
+git_username: "vach"  # needs to match what app in the repo
+git_repo: "xxxxxxxxxxxx"
+git_dest: "/opt/app-scripts"
+git_role: "" #secondary or merchant or empty for default primary
+
+# Mount:
+mnt_path: "/opt/operations"
+mnt_src: "10.61.40.168:/opt/operations"
+
+# Nagios:
+nagios_allowed_hosts: "127.0.0.1,::1,192.168.103.30"
+
+# Splunk:
+splunk_username: "admin"
+splunk_password: "xxxxxxxxxxxx"
+
+# for example kernel*,foo*
+upgrade_exclude_packages: ""
+
+# memcached
+memcached_size: "128"
+
+# Swap in GB only numbers:
+swap_size: "2"

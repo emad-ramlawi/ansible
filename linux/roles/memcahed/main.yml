@@ -1,0 +1,25 @@
+---
+- hosts: all
+  become: yes
+  tasks:  
+  - name: Install packages
+    apt:
+      name:
+      - php-memcached
+      - php-memcache
+      - memcached
+      - libmemcached-tools
+      state: latest
+
+  - name: Turn off memcached
+    command: systemctl stop memcached
+
+  - name: Configuring memcached size
+    lineinfile:
+      dest: /etc/memcached.conf 
+      regexp: '^(.*)-m (32|64|128|256|512|1024)(.*)$' 
+      line: "-m {{ memcached_size }}"
+      backrefs: yes
+
+  - name: Turn on memcached
+    command: systemctl start memcached

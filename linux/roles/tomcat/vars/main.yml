@@ -1,0 +1,25 @@
+#Please rename and remove the .sample
+---
+# Can be mazooma/MAZ or vach/VACH
+tomcat_username: "vach"
+tomcat_appname: "VACH"
+tomcat_version: "7.0.105"
+tomcat_dl: "https://mirror.csclub.uwaterloo.ca/apache/tomcat/tomcat-7/v7.0.105/bin/apache-tomcat-7.0.105.zip"
+
+# For accessing s3 bucket "ids.ansible.artifcats"
+aws_access_key: "xxxxxxxxxxxx"
+aws_secret_key: "xxxxxxxxxxxx"
+
+# Redis vars
+redis_host: "127.0.0.1"
+redis_pass: ""
+
+# App Encyption config key
+tomcat_appconfigkey: "xxxxxxxxxxxx"
+tomcat_service_name: "vach_105"
+
+# Memory
+tomcat_xms: "128"
+tomcat_xmx: "2048"
+tomcat_XX: "512"
+tomcat_debugport: "7005"

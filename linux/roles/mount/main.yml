@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+
+    - name: mk operations dir
+      command: mkdir -p "{{ mnt_path }}"
+      
+    - name: Mount up device
+      mount:
+        path: "{{ mnt_path }}"
+        src: "{{ mnt_src }}"
+        fstype: nfs4
+        opts: rw,nosuid
+        state: present

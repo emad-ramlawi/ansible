@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: yes
+  tasks: 
+
+    - name: Cleanup
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+        - "/opt/jdk-8u251-linux-x64.tar.gz"
+        - "/opt/redis_lib.zip"
+        - "/opt/splunkforwarder-6.6.1-aeae3fe0c5af-Linux-x86_64.tgz"
+        - "/opt/splunk-add-on-for-unix-and-linux_700.tgz"

@@ -1,0 +1,7 @@
+---
+tomcat_username: "vach"
+tomcat_appname: "VACH"
+aws_access_key: "xxxxxxxxxxxxx"
+aws_secret_key: "xxxxxxxxxxxx"
+splunk_username: "admin"
+splunk_password: "xxxxxxxxxxxx"

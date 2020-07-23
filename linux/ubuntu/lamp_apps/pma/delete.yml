@@ -1,7 +1,0 @@
----
-- hosts: all
-  become: yes
-  tasks: 
-    - name: delete pma folder
-      shell: chdir=/var/www/html rm -rf pma/
-    

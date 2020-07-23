@@ -1,0 +1,78 @@
+---
+- hosts: all
+  become: yes
+  tasks: 
+  
+    - name: S3 download splunk 1
+      aws_s3:
+        region: ca-central-1
+        bucket: ids.ansible.artifcats
+        object: splunkforwarder-6.6.1-aeae3fe0c5af-Linux-x86_64.tgz
+        dest: "/opt/splunkforwarder-6.6.1-aeae3fe0c5af-Linux-x86_64.tgz"
+        mode: get
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+
+    - name: S3 unarchive splunk 1
+      unarchive:
+        src: "/opt/splunkforwarder-6.6.1-aeae3fe0c5af-Linux-x86_64.tgz"
+        dest: "/opt/"
+        remote_src: yes
+        owner: "{{ tomcat_username }}"
+        group: "{{ tomcat_username }}"
+
+    - name: S3 download splunk 2
+      aws_s3:
+        region: ca-central-1
+        bucket: ids.ansible.artifcats
+        object: splunk-add-on-for-unix-and-linux_700.tgz
+        dest: "/opt/splunk-add-on-for-unix-and-linux_700.tgz"
+        mode: get
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+
+    - name: S3 unarchive splunk 2
+      unarchive:
+        src: "/opt/splunk-add-on-for-unix-and-linux_700.tgz"
+        dest: "/opt/splunkforwarder/etc/apps/"
+        remote_src: yes
+        owner: "{{ tomcat_username }}"
+        group: "{{ tomcat_username }}"
+
+    - name: create directory Splunk_TA_nix
+      file:
+        path: /opt/splunkforwarder/etc/apps/Splunk_TA_nix/local/
+        state: directory
+    
+    - name: Copy file 1
+      copy:
+        src: "templates/inputs.conf"
+        dest: "/opt/splunkforwarder/etc/apps/Splunk_TA_nix/local/inputs.conf"
+        
+    - name: Copy file 2
+      copy:
+        src: "templates/user-seed.conf"
+        dest: "/opt/splunkforwarder/etc/system/local/user-seed.conf"
+
+    - name: Copy file 3
+      copy:
+        src: "templates/web.conf"
+        dest: "/opt/splunkforwarder/etc/system/local/web.conf"
+      
+    - name: Splunk Install 3 
+      command: /opt/splunkforwarder/bin/splunk enable boot-start --accept-license
+      
+    - name: Splunk Install 4
+      command: /opt/splunkforwarder/bin/splunk start --accept-license
+      
+    - name: Splunk Wait 5
+      command: sleep 5
+      
+    - name: Splunk Install 5
+      command: /opt/splunkforwarder/bin/splunk add monitor /opt/apache-tomcat-*_"{{ tomcat_appname }}"/logs -auth '{{ splunk_username }}:{{ splunk_password }}'
+
+    - name: Splunk Install 6
+      command: /opt/splunkforwarder/bin/splunk add monitor /opt/business-tasks_*/run_business_tasks.log -auth '{{ splunk_username }}:"{{ splunk_password }}'
+
+    - name: Splunk Install 7
+      command: /opt/splunkforwarder/bin/splunk add forward-server 192.168.103.204:9997 -auth '{{ splunk_username }}:{{ splunk_password }}'

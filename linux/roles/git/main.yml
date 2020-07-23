@@ -1,0 +1,82 @@
+---
+- hosts: all
+  become: yes
+  tasks: 
+    
+    - name: Add desired user 
+      user:
+        name: "{{ git_username }}"
+        comment: new user
+
+    - name: ensure a list of packages installed
+      yum:
+        name: "{{ packages }}"
+      vars:
+        packages:
+        - git
+
+    - name: create dir
+      file:
+        path: "/opt/scripts/{{ git_username }}"
+        state: directory
+        owner: "{{ git_username }}"
+        group: "{{ git_username }}"
+
+    - name: Add Git Key (outside of ansible git repo dir in seperate folder next to it)
+      copy:
+        src: "../../vault/git_key"
+        dest: "/home/{{ git_username }}/git_key"
+        remote_src: no
+        owner: "{{ git_username }}" 
+        group: "{{ git_username }}"
+        mode: 0400
+
+    - name: Clone a private repository into dest
+      git:
+        repo: "{{ git_repo }}"
+        version: master
+        dest: "{{ git_dest }}"
+        key_file: "/home/{{ git_username }}/git_key"
+        accept_hostkey: yes
+        #force: yes
+
+    - name: fix permissions 
+      file:
+        path: "{{ git_dest }}"
+        owner: "{{ git_username }}"
+        group: "{{ git_username }}"
+        mode: 0755
+
+    - name: Copy file with owner and permissions
+      copy:
+        src: /opt/app-scripts/{{ git_username }}/scripts/
+        dest: /opt/scripts/{{ git_username }}
+        owner: "{{ git_username }}"
+        group: "{{ git_username }}"
+        mode: '0777'
+        remote_src: yes
+
+    - name: Remove Git Key
+      file:
+        path: "/home/{{ git_username }}/git_key"
+        state: absent
+
+    - name: Git role secondary
+      copy:
+        src: /opt/app-scripts/{{ git_username }}/scripts/deployment-secondary.sh
+        dest: /opt/scripts/{{ git_username }}/deployment.sh
+        owner: "{{ git_username }}"
+        group: "{{ git_username }}"
+        mode: '0777'
+        remote_src: yes
+      when: git_role == "secondary"
+
+    - name: Git role merchant
+      copy:
+        src: /opt/app-scripts/{{ git_username }}/scripts/deployment-merchant.sh
+        dest: /opt/scripts/{{ git_username }}/deployment.sh
+        owner: "{{ git_username }}"
+        group: "{{ git_username }}"
+        mode: '0777'
+        remote_src: yes
+      when: git_role == "merchant"

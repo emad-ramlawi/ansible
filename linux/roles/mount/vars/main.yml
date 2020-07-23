@@ -1,0 +1,4 @@
+#Please rename and remove the .sample
+---
+mnt_path: "/opt/operations"
+mnt_src: "10.61.40.168:/opt/operations"

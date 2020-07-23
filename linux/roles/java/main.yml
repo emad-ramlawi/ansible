@@ -1,0 +1,42 @@
+---
+- hosts: all
+  become: yes
+  tasks: 
+
+    - name: Cleanup
+      file:
+        path: "{{ item }}"
+        state: absent
+      with_items:
+        - "/opt/java/jdk{{ java_version }}"
+
+    - name: Create a directory /opt/java
+      file:
+        path: "/opt/java/jdk{{ java_version }}"
+        state: directory
+        mode: '0755'
+
+    - name: ensure a list of packages installed
+      yum:
+        name: "{{ packages }}"
+      vars:
+        packages:
+        - git
+        - python-boto3
+
+    - name: S3 download JAVA JDK
+      aws_s3:
+        region: ca-central-1
+        bucket: ids.ansible.artifcats
+        object: jdk-8u251-linux-x64.tar.gz 
+        dest: "/opt/jdk-8u251-linux-x64.tar.gz"
+        mode: get
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+
+    - name: Unarchive JAVA JDK
+      unarchive:
+        src: "/opt/jdk-8u251-linux-x64.tar.gz"
+        dest: "/opt/java/jdk{{ java_version }}"
+        remote_src: yes
+        extra_opts: [--strip-components=1]

@@ -1,0 +1,7 @@
+#Please rename and remove the .sample
+---
+git_username: "vach"
+git_repo: "git@bitbucket.org:paramountcommercecom/app-scripts.git"
+git_dest: "/opt/app-scripts"
+#secondary or merchant or empty
+git_role: ""

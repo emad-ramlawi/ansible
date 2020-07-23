@@ -1,0 +1,3 @@
+---
+# for example kernel*,foo*
+upgrade_exclude_packages: ""

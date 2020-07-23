@@ -1,0 +1,3 @@
+#Please rename and remove the .sample
+---
+hostname: "ansible-test-target"

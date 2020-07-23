@@ -1,0 +1,12 @@
+# Systemd unit file for tomcat
+[Unit]
+Description=Apache Tomcat {{ tomcat_service_name }}
+After=syslog.target network.target
+[Service]
+Type=forking
+ExecStart=/opt/apache-tomcat-7.0.105_{{ tomcat_appname }}/bin/startup.sh
+ExecStop=/opt/apache-tomcat-7.0.105_{{ tomcat_appname }}/bin/shutdown.sh
+User={{ tomcat_username }}
+Group={{ tomcat_username }}
+[Install]
+WantedBy=multi-user.target
