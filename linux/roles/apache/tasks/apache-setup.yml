@@ -1,0 +1,43 @@
+---
+- name: Install packages
+  yum:
+    state: present
+    name:
+      - httpd
+
+- name: Enable service httpd
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+
+- name: Create document root
+  file:
+    path: "/var/www/{{ http_host }}"
+    state: directory
+    owner: "{{ service_name }}"
+    mode: '0755'
+
+- name: Copy index test page
+  template:
+    mode: '0644'
+    src: "index.html.j2"
+    dest: "/var/www/{{ http_host }}/index.html"
+
+- name: Create a Sites available Directory
+  file:
+    path: /etc/httpd/sites-available
+    state: directory
+    mode: '0755'
+
+- name: Create a Sites Enabled Directory
+  file:
+    path: /etc/httpd/sites-enabled
+    state: directory
+    mode: '0755'
+
+- name: Set up Apache virtualHost
+  template:
+    mode: '0644'
+    src: "apache.conf.j2"
+    dest: "/etc/httpd/sites-available/{{ http_conf }}"

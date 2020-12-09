@@ -1,0 +1,41 @@
+---
+#Global
+host_environment: "stg"
+application_role: 'main'
+timezone: "America/Toronto"
+
+#Java
+java_home: /opt/java/jdk{{ java_version }}/jre
+java_symlink: /opt/java/jre
+java_version: "1.8.0_251"
+java_version_number: "8"
+
+#Tomcat
+tomcat_version: "7.0.106"
+tomcat_version_number: "7"
+
+ui_manager_user: "{{ vault_ui_manager_user }}"
+ui_manager_pass: "{{ vault_ui_manager_pass }}"
+ui_admin_username: "{{ vault_ui_admin_username }}"
+ui_admin_pass: "{{ vault_ui_admin_pass }}"
+redis_host: "127.0.0.1"
+redis_password: "{{ vault_redis_password }}"
+
+#SSH Keys
+ssh_private_key: "{{ vault_ssh_private_key }}"
+frankie_ssh_public_key: "{{ vault_frankie_ssh_pub_key }}"
+jimi_ssh_public_key: "{{ vault_jimi_ssh_pub_key }}"
+
+#Artifactory Key
+artifactory_api_key: "{{ vault_artifactory_api_key }}"
+
+# Cloud Passage
+cloudpassage_agent_key: "{{ vault_cloudpassage_agent_key }}"
+
+#Splunk
+splunk_password: "{{ vault_splunk_password }}"
+
+# Pull App Scripts
+git_repo: "git@bitbucket.org:paramountcommercecom/app-scripts.git"
+git_dest: "/tmp/app-scripts"
+script_dir: "/opt/scripts/"

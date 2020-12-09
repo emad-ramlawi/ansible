@@ -1,0 +1,97 @@
+---
+- name: Download Spunk Forwarders
+  get_url:
+    url: "{{ splunk_forwarder_url }}"
+    dest: "{{ splunk_forwarder_dest }}"
+    headers: 'X-JFrog-Art-Api: {{ artifactory_api_key }}'
+
+- name: Download Splunk Linux Add on
+  get_url:
+    url: "{{ splunk_addon_url }}"
+    dest: "{{ splunk_addon_dest }}"
+    headers: 'X-JFrog-Art-Api: {{ artifactory_api_key }}'
+
+- name: Create a directory /opt/splunkforwarder
+  file:
+    path: "/opt/splunkforwarder"
+    state: directory
+    mode: '0755'
+
+- name: Extract Spunk Forwarders
+  unarchive:
+    src: "{{ splunk_forwarder_dest }}"
+    dest: "/opt/splunkforwarder"
+    mode: '0755'
+    remote_src: yes
+    extra_opts: "--strip-components=1"
+
+- name: Extract Splunk Linux Add on
+  unarchive:
+    src: "{{ splunk_addon_dest }}"
+    dest: "/opt/splunkforwarder/etc/apps/"
+    mode: '0755'
+    remote_src: yes
+    extra_opts: "--strip-components=1"
+    creates: /opt/splunkforwarder/etc/apps
+
+- name: create directory Splunk_TA_nix
+  file:
+    path: /opt/splunkforwarder/etc/apps/Splunk_TA_nix/local/
+    mode: '0755'
+    state: directory
+
+- name: Set Splunk Input Conf
+  template:
+    src:  inputs.conf.j2
+    mode: '0644'
+    dest: /opt/splunkforwarder/etc/apps/Splunk_TA_nix/local/inputs.conf
+
+- name: Set Splunk Output Conf
+  template:
+    src:  outputs.conf.j2
+    mode: '0644'
+    dest: /opt/splunkforwarder/etc/apps/Splunk_TA_nix/local/outputs.conf
+
+- name: Set Splunk Web Conf
+  template:
+    src:  web.conf.j2
+    mode: '0644'
+    dest: /opt/splunkforwarder/etc/system/local/web.conf
+
+- name: Set Splunk Auth Conf
+  template:
+    src: user-seed.conf.j2
+    mode: '0644'
+    dest: /opt/splunkforwarder/etc/system/local/user-seed.conf
+
+# Skipping Linting Rule for this task because of lack of third party Ansible module
+- name: Splunk Install 3
+  command: /opt/splunkforwarder/bin/splunk enable boot-start --accept-license --answer-yes --no-prompt # noqa 301
+
+- name: Splunk User Set
+  lineinfile:
+    path: /opt/splunkforwarder/etc/splunk-launch.conf
+    regexp: '^SPLUNK_OS_USER='
+    line: '#SPLUNK_OS_USER=admin'
+
+# Skipping Linting Rule for this task because of lack of third party Ansible module
+- name: Splunk Install 4
+  command: /opt/splunkforwarder/bin/splunk start --accept-license --answer-yes # noqa 301
+
+# Skipping Linting Rule for this task because of lack of third party Ansible module
+- name: Splunk change password 5
+  command: /opt/splunkforwarder/bin/splunk list forward-server -auth 'admin:{{ splunk_password }}' # noqa 301
+
+- name: Remove Tmp files
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /tmp/splunk-add-on-for-unix-and-linux_820.tgz
+    - /tmp/splunkforwarder-8.0.6-152fb4b2bb96-Linux-x86_64.tgz
+
+#- name: Splunk Install 6
+#  command: /opt/splunkforwarder/bin/splunk add monitor /opt/tomcat/logs -auth 'admin:{{ splunk_password }}'
+
+#- name: Splunk Install 6
+#  command: /opt/splunkforwarder/bin/splunk add monitor /opt/business-tasks_*/run_business_tasks.log -auth 'admin:{{ splunk_password }}'

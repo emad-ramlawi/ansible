@@ -1,0 +1,10 @@
+---
+- name: Set authorized key in alternate location
+  authorized_key:
+    user: tomcat
+    state: present
+    key: "{{ item }}"
+    manage_dir: False
+  loop:
+    - "{{ frankie_ssh_public_key }}"
+    - "{{ jimi_ssh_public_key }}"

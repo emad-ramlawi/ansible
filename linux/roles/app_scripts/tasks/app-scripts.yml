@@ -1,0 +1,72 @@
+---
+# This is to allow for the git cloning of the App Scripts repository in Bitbucket
+- name: Copy SSH private key
+  copy:
+    content: "{{ ssh_private_key }}"
+    dest: "~/.ssh/id_rsa"
+    mode: 0600
+
+- name: Git checkout
+  git:
+    repo: "{{ git_repo }}"
+    dest: "{{ git_dest }}"
+    clone: yes
+    accept_hostkey: yes
+
+- name: Copy file with owner and permissions
+  copy:
+    src: "{{ git_dest }}/{{ application_name }}/scripts/"
+    dest: "{{ script_dir }}"
+    owner: "{{ service_name }}"
+    group: "{{ service_name }}"
+    mode: '0755'
+    remote_src: yes
+
+- name: Remove Git Private Key
+  file:
+    path: "~/.ssh/id_rsa"
+    state: absent
+# For the Vach Machine there are different deployment scripts depending on the role of the machine
+- name: Remove other deployment files if main role
+  file:
+    path: "{{ script_dir }}deployment-merchant.sh"
+    state: absent
+  when: application_role == "main"
+
+- name: Remove other deployment files if main role
+  file:
+    path: "{{ script_dir }}deployment-secondary.sh"
+    state: absent
+  when: application_role == "main"
+
+- name: Remove other deployment files if secondary role
+  file:
+    path: "{{ script_dir }}deployment-merchant.sh"
+    state: absent
+  when: application_role == "secondary"
+
+- name: Remove other deployment files if secondary role
+  file:
+    path: "{{ script_dir }}deployment-main.sh"
+    state: absent
+  when: application_role == "secondary"
+
+- name: Remove other deployment files if merchant role
+  file:
+    path: "{{ script_dir }}deployment-main.sh"
+    state: absent
+  when: application_role == "merchant"
+
+- name: Remove other deployment files if merchant role
+  file:
+    path: "{{ script_dir }}deployment-secondary.sh"
+    state: absent
+  when: application_role == "merchant"
+
+- name: Fix Script Permissions
+  file:
+    path: "/opt/scripts"
+    owner: "{{ service_name }}"
+    group: "{{ service_name }}"
+    mode: '0755'
+    recurse: yes

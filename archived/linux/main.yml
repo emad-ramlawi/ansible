@@ -1,0 +1,13 @@
+## Roles in order:
+- import_playbook: roles/upgrade/main.yml
+- import_playbook: roles/hostname/main.yml
+- import_playbook: roles/adduser/main.yml
+- import_playbook: roles/timezone/main.yml
+- import_playbook: roles/java/main.yml
+- import_playbook: roles/tomcat/main.yml
+- import_playbook: roles/git/main.yml
+- import_playbook: roles/apache/main.yml
+- import_playbook: roles/mount/main.yml
+- import_playbook: roles/nagios/main.yml
+- import_playbook: roles/splunk/main.yml
+- import_playbook: roles/cleanup/main.yml

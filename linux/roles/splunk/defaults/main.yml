@@ -1,0 +1,5 @@
+---
+splunk_addon_url: https://paramountcommerce.jfrog.io/artifactory/ansible-app-local/splunk-add-on-for-unix-and-linux_820.tgz
+splunk_addon_dest: /tmp/splunk-add-on-for-unix-and-linux_820.tgz
+splunk_forwarder_url: https://download.splunk.com/products/universalforwarder/releases/8.0.6/linux/splunkforwarder-8.0.6-152fb4b2bb96-Linux-x86_64.tgz
+splunk_forwarder_dest: /tmp/splunkforwarder-8.0.6-152fb4b2bb96-Linux-x86_64.tgz

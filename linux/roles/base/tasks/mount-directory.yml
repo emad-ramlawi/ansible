@@ -1,0 +1,14 @@
+---
+- name: Create a Mount Directory
+  file:
+    path: "{{ mnt_path }}"
+    state: directory
+    mode: '0755'
+
+- name: Mount up device
+  mount:
+    path: "{{ mnt_path }}"
+    src: "{{ mnt_src }}"
+    fstype: nfs4
+    opts: rw,nosuid
+    state: present

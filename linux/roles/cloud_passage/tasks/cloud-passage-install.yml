@@ -1,0 +1,33 @@
+---
+- name: Add repository
+  yum_repository:
+    name: Cloudpassage
+    description: Cloudpassage YUM repo
+    file: cloudpassage.repo
+    baseurl: https://production.packages.cloudpassage.com/redhat/$basearch/
+    gpgcheck: yes
+
+- name: Import a key from a file
+  rpm_key:
+    state: present
+    key: https://production.packages.cloudpassage.com/cloudpassage.packages.key
+
+- name: Conduct yum update
+  yum:
+    name: '*'
+    state: latest
+    update_cache: yes
+
+- name: Install cphalo packages
+  yum:
+    state: present
+    name:
+      - cphalo
+
+- name: Configure Agent Key
+  command: sudo /opt/cloudpassage/bin/configure --agent-key={{ vault_cloudpassage_agent_key }} --grid=https://grid.cloudpassage.com/grid
+
+- name: Restart service cphalod
+  service:
+    name: cphalod
+    state: start

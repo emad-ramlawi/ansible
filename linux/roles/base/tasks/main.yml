@@ -1,0 +1,4 @@
+---
+- include: base-setup.yml
+- include: mount-directory.yml
+- include: ssh-setup.yml

@@ -1,0 +1,42 @@
+dependency:
+  name: galaxy
+driver:
+  name: vagrant
+  provider:
+    name: virtualbox
+scenario:
+  name: default
+  test_sequence:
+    - lint
+    - destroy
+    - dependency
+    - syntax
+    - create
+    - prepare
+    - converge
+    - idempotence
+    - side_effect
+    #- verify
+    - destroy
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+platforms:
+  - name: instance
+    interfaces:
+      - network_name: forwarded_port
+        guest: 8080
+        host: 8080
+    box: bento/amazonlinux-2
+provisioner:
+  name: ansible
+  inventory:
+    links:
+      hosts: ../../../../inventory/dev/hosts
+      group_vars: ../../../../inventory/dev/group_vars
+  config_options:
+    defaults:
+      vault_password_file: "~/.vault.txt"
+verifier:
+  name: ansible

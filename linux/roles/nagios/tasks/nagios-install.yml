@@ -1,0 +1,29 @@
+---
+# Skipping Linting Rule for this task because there is no amazon-linux-extras Ansible module
+- name: Add EPEL Repo
+  command: "amazon-linux-extras install epel -y" # noqa 301
+
+- name: Pause for 3 seconds
+  pause:
+    seconds: 3
+
+- name: Install packages
+  yum:
+    name:
+    - nagios-plugins-all
+    - nagios-plugins-nrpe
+    - nrpe
+
+- name: Configuring allowed_hosts
+  lineinfile:
+    dest: /etc/nagios/nrpe.cfg
+    regexp: '^(.*)allowed_hosts(.*)$'
+    line: "allowed_hosts= {{ nagios_allowed_hosts }}"
+    backrefs: yes
+
+- name: Start and enable tomcat
+  service:
+    daemon_reload: yes
+    name: nrpe
+    state: started
+    enabled: yes

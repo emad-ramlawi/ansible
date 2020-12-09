@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: vach
+  become: yes
+  vars_files:
+    - ../../../../inventory/dev/group_vars/all
+    - ../../../../inventory/dev/group_vars/vach
+    - ../../../../inventory/dev/group_vars/vault
+  roles:
+    - base

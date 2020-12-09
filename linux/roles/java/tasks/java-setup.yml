@@ -1,0 +1,39 @@
+- name: Create a directory /opt/java
+  file:
+    path: "/opt/java/jdk{{ java_version }}"
+    owner: "{{ service_name }}"
+    group: "{{ service_name }}"
+    state: directory
+    mode: '0755'
+
+- name: Download Java
+  get_url:
+    url: "{{ java_url }}"
+    dest: "{{ java_dest }}"
+    headers: 'X-JFrog-Art-Api: {{ artifactory_api_key }}'
+
+- name: Extract Java archive
+  unarchive:
+    src: "{{ java_dest }}"
+    dest: "/opt/java/jdk{{ java_version }}"
+    owner: "{{ service_name }}"
+    group: "{{ service_name }}"
+    mode: '0755'
+    remote_src: yes
+    extra_opts: "--strip-components=1"
+    creates: /opt/tomcat/bin
+
+- name: Create Symlink for Java
+  file:
+    src: "{{ java_home }}"
+    dest: "{{ java_symlink }}"
+    owner: "{{ service_name }}"
+    group: "{{ service_name }}"
+    state: link
+
+- name: Remove Tmp files
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /tmp/jdk-8u251-linux-x64.tar.gz

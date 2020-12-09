@@ -1,0 +1,6 @@
+---
+service_name: 'tomcat'
+application_name: 'vach'
+
+#For the Application Scripts logic
+application_role: 'merchant'

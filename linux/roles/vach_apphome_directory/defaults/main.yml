@@ -1,0 +1,3 @@
+---
+vach_config_url: https://paramountcommerce.jfrog.io/artifactory/ansible-app-local/vach_{{ host_environment }}.tar.gz
+vach_config_dest: /tmp/vach_{{ host_environment }}.tar.gz

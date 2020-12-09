@@ -1,0 +1,4 @@
+---
+service_name: 'test'
+mnt_path: "/opt/operations"
+mnt_src: "10.61.40.168:/opt/operations"

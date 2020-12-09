@@ -1,0 +1,30 @@
+#- name: Update the system
+  #yum:
+    #name: "*"
+    #state: latest
+- name: Install basic packages
+  package:
+    name: ['vim', 'bash-completion', 'tmux', 'tree', 'htop', 'wget', 'unzip', 'curl', 'git']
+    state: present
+
+- name: Add Service group
+  group:
+    name: "{{ service_name }}"
+    state: present
+
+- name: Configure Hostname
+  hostname:
+    name: "{{ application_name }}"
+
+- name: Set the machine timezone
+  timezone:
+    name: "{{ timezone }}"
+
+- name: Add "Service" user
+  user:
+    name: "{{ service_name }}"
+    group: "{{ service_name }}"
+    home: /home/{{ service_name }}
+    createhome: yes
+    state: present
+    system: yes

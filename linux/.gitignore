@@ -1,0 +1,8 @@
+site.yml
+local/*
+roles_local/*
+.vagrant/*
+.idea
+*.iml
+*.retry
+*.swp

@@ -1,0 +1,9 @@
+---
+- name: Verify
+  hosts: all
+
+  tasks:
+    - name: Verify Tomcat is serving web requests.
+      uri:
+        url: http://localhost:8080/
+        status_code: 200
