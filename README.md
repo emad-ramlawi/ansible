@@ -48,8 +48,6 @@ look at the line below that **ro** and change it with
 
 
 
-<img src="/home/medo/.config/Typora/typora-user-images/image-20200723124152066.png" alt="image-20200723124152066" style="zoom: 80%;" />
-
 
 
 then run
