@@ -10,7 +10,7 @@
         exclude: "{{ upgrade_exclude_packages }}"
         
     - name: cat file
-      shell: cat  cat /etc/os-release 
+      shell: cat /etc/os-release 
       register: cat_content_file
 
     - name: echo file
