@@ -8,3 +8,5 @@
         name: '*'
         state: latest
         exclude: "{{ upgrade_exclude_packages }}"
+        
+  - debug: msg="{{ details.stdout_lines | quote }}"
